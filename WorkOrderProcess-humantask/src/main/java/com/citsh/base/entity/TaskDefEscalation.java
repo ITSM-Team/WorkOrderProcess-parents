@@ -1,6 +1,5 @@
 package com.citsh.base.entity;
 
-import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,95 +8,133 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+* TaskDefEscalation 任务定义升级.
+*/
 @Entity
-@Table(name="TASK_DEF_ESCALATION")
-public class TaskDefEscalation
-  implements Serializable
-{
-  private static final long serialVersionUID = 0L;
-  private Long id;
-  private TaskDefDeadline taskDefDeadline;
-  private String type;
-  private String status;
-  private String escalationCondition;
-  private String value;
+@Table(name = "TASK_DEF_ESCALATION")
+public class TaskDefEscalation implements java.io.Serializable {
+ private static final long serialVersionUID = 0L;
 
-  public TaskDefEscalation()
-  {
-  }
+ /** 主键. */
+ private Long id;
 
-  public TaskDefEscalation(Long id)
-  {
-    this.id = id;
-  }
+ /** 外键，截止时间. */
+ private TaskDefDeadline taskDefDeadline;
 
-  public TaskDefEscalation(Long id, TaskDefDeadline taskDefDeadline, String type, String status, String escalationCondition, String value)
-  {
-    this.id = id;
-    this.taskDefDeadline = taskDefDeadline;
-    this.type = type;
-    this.status = status;
-    this.escalationCondition = escalationCondition;
-    this.value = value;
-  }
-  @Id
-  @Column(name="ID", unique=true, nullable=false)
-  public Long getId() {
-    return this.id;
-  }
+ /** 类型. */
+ private String type;
 
-  public void setId(Long id)
-  {
-    this.id = id;
-  }
-  @ManyToOne(fetch=FetchType.LAZY)
-  @JoinColumn(name="DEADLINE_ID")
-  public TaskDefDeadline getTaskDefDeadline() {
-    return this.taskDefDeadline;
-  }
+ /** 状态. */
+ private String status;
 
-  public void setTaskDefDeadline(TaskDefDeadline taskDefDeadline)
-  {
-    this.taskDefDeadline = taskDefDeadline;
-  }
+ /** 升级条件. */
+ private String escalationCondition;
 
-  @Column(name="TYPE", length=50)
-  public String getType() {
-    return this.type;
-  }
+ /** 值. */
+ private String value;
 
-  public void setType(String type)
-  {
-    this.type = type;
-  }
+ public TaskDefEscalation() {
+ }
 
-  @Column(name="STATUS", length=50)
-  public String getStatus() {
-    return this.status;
-  }
+ public TaskDefEscalation(Long id) {
+     this.id = id;
+ }
 
-  public void setStatus(String status)
-  {
-    this.status = status;
-  }
+ public TaskDefEscalation(Long id, TaskDefDeadline taskDefDeadline,
+         String type, String status, String escalationCondition, String value) {
+     this.id = id;
+     this.taskDefDeadline = taskDefDeadline;
+     this.type = type;
+     this.status = status;
+     this.escalationCondition = escalationCondition;
+     this.value = value;
+ }
 
-  @Column(name="ESCALATION_CONDITION", length=200)
-  public String getEscalationCondition() {
-    return this.escalationCondition;
-  }
+ /** @return 主键. */
+ @Id
+ @Column(name = "ID", unique = true, nullable = false)
+ public Long getId() {
+     return this.id;
+ }
 
-  public void setEscalationCondition(String escalationCondition)
-  {
-    this.escalationCondition = escalationCondition;
-  }
+ /**
+  * @param id
+  *            主键.
+  */
+ public void setId(Long id) {
+     this.id = id;
+ }
 
-  @Column(name="VALUE", length=200)
-  public String getValue() {
-    return this.value;
-  }
+ /** @return 外键，截止时间. */
+ @ManyToOne(fetch = FetchType.LAZY)
+ @JoinColumn(name = "DEADLINE_ID")
+ public TaskDefDeadline getTaskDefDeadline() {
+     return this.taskDefDeadline;
+ }
 
-  public void setValue(String value)
-  {
-    this.value = value;
-  }
+ /**
+  * @param taskDefDeadline
+  *            外键，截止时间.
+  */
+ public void setTaskDefDeadline(TaskDefDeadline taskDefDeadline) {
+     this.taskDefDeadline = taskDefDeadline;
+ }
+
+ /** @return 类型. */
+ @Column(name = "TYPE", length = 50)
+ public String getType() {
+     return this.type;
+ }
+
+ /**
+  * @param type
+  *            类型.
+  */
+ public void setType(String type) {
+     this.type = type;
+ }
+
+ /** @return 状态. */
+ @Column(name = "STATUS", length = 50)
+ public String getStatus() {
+     return this.status;
+ }
+
+ /**
+  * @param status
+  *            状态.
+  */
+ public void setStatus(String status) {
+     this.status = status;
+ }
+
+ /** @return 升级条件. */
+ @Column(name = "ESCALATION_CONDITION", length = 200)
+ public String getEscalationCondition() {
+     return this.escalationCondition;
+ }
+
+ /**
+  * @param escalationCondition
+  *            升级条件.
+  */
+ public void setEscalationCondition(String escalationCondition) {
+     this.escalationCondition = escalationCondition;
+ }
+
+ /** @return 值. */
+ @Column(name = "VALUE", length = 200)
+ public String getValue() {
+     return this.value;
+ }
+
+ /**
+  * @param value
+  *            值.
+  */
+ public void setValue(String value) {
+     this.value = value;
+ }
 }
+

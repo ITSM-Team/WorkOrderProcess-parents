@@ -40,7 +40,7 @@ public class BpmConfFormController
   {
     BpmConfNode bpmConfNode = this.bpmConfNodeService.find(bpmConfNodeId);
     Long bpmConfBaseId = bpmConfNode.getBpmConfBase().getId();
-    List bpmConfForms = this.bpmConfFormService.listBySQL("bpmConfNode.id=?", new Object[] { bpmConfNode.getId() });
+    List<BpmConfForm> bpmConfForms = this.bpmConfFormService.listBySQL("bpmConfNode.id=?", new Object[] { bpmConfNode.getId() });
     model.addAttribute("bpmConfBaseId", bpmConfBaseId);
     model.addAttribute("bpmConfForms", bpmConfForms);
     return "bpm/bpm-conf-form-list";

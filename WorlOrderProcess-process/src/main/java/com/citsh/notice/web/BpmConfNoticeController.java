@@ -10,6 +10,7 @@ import com.citsh.notice.entity.BpmConfNotice;
 import com.citsh.notice.service.BpmConfNoticeService;
 import com.citsh.notice.service.BpmMailTemplateService;
 import com.citsh.notification.NotificationConnector;
+import com.citsh.template.service.TemplateInfoService;
 import com.citsh.tenant.TenantHolder;
 import java.util.Collection;
 import java.util.List;
@@ -40,8 +41,8 @@ public class BpmConfNoticeController
   @Autowired
   private TenantHolder tenantHolder;
 
-  // @Autowired
-  // private TemplateInfoService templateInfoService;
+  @Autowired
+  private TemplateInfoService templateInfoService;
 
   @Autowired
   private NotificationConnector notificationConnector;
@@ -66,9 +67,9 @@ public class BpmConfNoticeController
 
   public String input() {
     String tenantId = this.tenantHolder.getTenantId();
-  //   List templateDTOs = this.templateInfoService.findAll(tenantId);
+    List templateDTOs = this.templateInfoService.findAll(tenantId);
     Model model = new RedirectAttributesModelMap();
-    model.addAttribute("templateDtos", null);
+    model.addAttribute("templateDtos", templateDTOs);
     Collection types = this.notificationConnector.getTypes(tenantId);
     model.addAttribute("types", types);
 

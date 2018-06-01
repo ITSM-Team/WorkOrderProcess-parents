@@ -1,23 +1,48 @@
 package com.citsh.dao;
-
-import com.citsh.page.Page;
 import java.util.Map;
 
-public abstract interface ProcessConnectorDao
-{
-  public abstract String startProcess(String paramString1, String paramString2, String paramString3, Map<String, Object> paramMap);
+import com.citsh.page.Page;
 
-  public abstract Page findDeployments(String paramString, Page paramPage);
+public interface ProcessConnectorDao {
+	/**
+	 * 启动流程
+	 */
+	String startProcess(String userId, String businessKey, String processDefinitionId,
+			Map<String, Object> processParameters);
 
-  public abstract Page findProcessDefinitions(String paramString, Page paramPage);
+	/**
+	 * 部署列表.
+	 */
+	Page findDeployments(String tenantId, Page page);
 
-  public abstract Page findProcessInstances(String paramString, Page paramPage);
+	/**
+	 * 流程定义.
+	 */
+	Page findProcessDefinitions(String tenantId, Page page);
 
-  public abstract Page findTasks(String paramString, Page paramPage);
+	/**
+	 * 流程实例.
+	 */
+	Page findProcessInstances(String tenantId, Page page);
 
-  public abstract Page findHistoricProcessInstances(String paramString, Page paramPage);
+	/**
+	 * 任务.
+	 */
+	Page findTasks(String tenantId, Page page);
 
-  public abstract Page findHistoricActivityInstances(String paramString, Page paramPage);
+	/**
+	 * 历史流程实例.
+	 */
+	Page findHistoricProcessInstances(String tenantId, Page page);
 
-  public abstract Page findHistoricTaskInstances(String paramString, Page paramPage);
+	/**
+	 * 历史节点.
+	 */
+	Page findHistoricActivityInstances(String tenantId, Page page);
+
+	/**
+	 * 显示历史任务
+	 */
+	Page findHistoricTaskInstances(String tenantId, Page page);
 }
+

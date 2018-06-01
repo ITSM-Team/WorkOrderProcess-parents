@@ -1,9 +1,8 @@
 package com.citsh.notice.entity;
 
-import com.citsh.config.entity.BpmTaskDefNotice;
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,94 +10,135 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.citsh.config.entity.BpmTaskDefNotice;
+
+/**
+ * BpmMailTemplate .
+ */
 @Entity
-@Table(name="BPM_MAIL_TEMPLATE")
-public class BpmMailTemplate
-  implements Serializable
-{
-  private static final long serialVersionUID = 0L;
-  private Long id;
-  private String name;
-  private String subject;
-  private String content;
-  private Set<BpmTaskDefNotice> bpmTaskDefNotices = new HashSet(0);
+@Table(name = "BPM_MAIL_TEMPLATE")
+public class BpmMailTemplate implements java.io.Serializable {
+    private static final long serialVersionUID = 0L;
 
-  private Set<BpmConfNotice> bpmConfNotices = new HashSet(0);
+    /** null. */
+    private Long id;
 
-  public BpmMailTemplate() {
-  }
+    /** null. */
+    private String name;
 
-  public BpmMailTemplate(Long id) {
-    this.id = id;
-  }
+    /** null. */
+    private String subject;
 
-  public BpmMailTemplate(Long id, String name, String subject, String content, Set<BpmTaskDefNotice> bpmTaskDefNotices, Set<BpmConfNotice> bpmConfNotices)
-  {
-    this.id = id;
-    this.name = name;
-    this.subject = subject;
-    this.content = content;
-    this.bpmTaskDefNotices = bpmTaskDefNotices;
-    this.bpmConfNotices = bpmConfNotices;
-  }
-  @Id
-  @Column(name="ID", unique=true, nullable=false)
-  public Long getId() {
-    return this.id;
-  }
+    /** null. */
+    private String content;
 
-  public void setId(Long id)
-  {
-    this.id = id;
-  }
+    /** . */
+    private Set<BpmTaskDefNotice> bpmTaskDefNotices = new HashSet<BpmTaskDefNotice>(
+            0);
 
-  @Column(name="NAME", length=50)
-  public String getName() {
-    return this.name;
-  }
+    /** . */
+    private Set<BpmConfNotice> bpmConfNotices = new HashSet<BpmConfNotice>(0);
 
-  public void setName(String name)
-  {
-    this.name = name;
-  }
+    public BpmMailTemplate() {
+    }
 
-  @Column(name="SUBJECT", length=100)
-  public String getSubject() {
-    return this.subject;
-  }
+    public BpmMailTemplate(Long id) {
+        this.id = id;
+    }
 
-  public void setSubject(String subject)
-  {
-    this.subject = subject;
-  }
+    public BpmMailTemplate(Long id, String name, String subject,
+            String content, Set<BpmTaskDefNotice> bpmTaskDefNotices,
+            Set<BpmConfNotice> bpmConfNotices) {
+        this.id = id;
+        this.name = name;
+        this.subject = subject;
+        this.content = content;
+        this.bpmTaskDefNotices = bpmTaskDefNotices;
+        this.bpmConfNotices = bpmConfNotices;
+    }
 
-  @Column(name="CONTENT", length=200)
-  public String getContent() {
-    return this.content;
-  }
+    /** @return null. */
+    @Id
+    @Column(name = "ID", unique = true, nullable = false)
+    public Long getId() {
+        return this.id;
+    }
 
-  public void setContent(String content)
-  {
-    this.content = content;
-  }
+    /**
+     * @param id
+     *            null.
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-  @OneToMany(fetch=FetchType.LAZY, mappedBy="bpmMailTemplate")
-  public Set<BpmTaskDefNotice> getBpmTaskDefNotices() {
-    return this.bpmTaskDefNotices;
-  }
+    /** @return null. */
+    @Column(name = "NAME", length = 50)
+    public String getName() {
+        return this.name;
+    }
 
-  public void setBpmTaskDefNotices(Set<BpmTaskDefNotice> bpmTaskDefNotices)
-  {
-    this.bpmTaskDefNotices = bpmTaskDefNotices;
-  }
+    /**
+     * @param name
+     *            null.
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
-  @OneToMany(fetch=FetchType.LAZY, mappedBy="bpmMailTemplate")
-  public Set<BpmConfNotice> getBpmConfNotices() {
-    return this.bpmConfNotices;
-  }
+    /** @return null. */
+    @Column(name = "SUBJECT", length = 100)
+    public String getSubject() {
+        return this.subject;
+    }
 
-  public void setBpmConfNotices(Set<BpmConfNotice> bpmConfNotices)
-  {
-    this.bpmConfNotices = bpmConfNotices;
-  }
+    /**
+     * @param subject
+     *            null.
+     */
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    /** @return null. */
+    @Column(name = "CONTENT", length = 200)
+    public String getContent() {
+        return this.content;
+    }
+
+    /**
+     * @param content
+     *            null.
+     */
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    /** @return . */
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "bpmMailTemplate")
+    public Set<BpmTaskDefNotice> getBpmTaskDefNotices() {
+        return this.bpmTaskDefNotices;
+    }
+
+    /**
+     * @param bpmTaskDefNotices
+     *            .
+     */
+    public void setBpmTaskDefNotices(Set<BpmTaskDefNotice> bpmTaskDefNotices) {
+        this.bpmTaskDefNotices = bpmTaskDefNotices;
+    }
+
+    /** @return . */
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "bpmMailTemplate")
+    public Set<BpmConfNotice> getBpmConfNotices() {
+        return this.bpmConfNotices;
+    }
+
+    /**
+     * @param bpmConfNotices
+     *            .
+     */
+    public void setBpmConfNotices(Set<BpmConfNotice> bpmConfNotices) {
+        this.bpmConfNotices = bpmConfNotices;
+    }
 }

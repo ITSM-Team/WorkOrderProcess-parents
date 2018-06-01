@@ -1,5 +1,4 @@
 package com.citsh.base.service.impl;
-
 import com.citsh.base.dao.TaskDefOperationDao;
 import com.citsh.base.entity.TaskDefOperation;
 import com.citsh.base.service.TaskDefOperationService;
@@ -15,12 +14,12 @@ public class TaskDefOperationServiceImpl implements TaskDefOperationService {
 	@Autowired
 	private TaskDefOperationDao taskDefOperationDao;
 
-	public List<TaskDefOperation> findByBaseCodeAndBaseProcessId(String condition, Object[] args) {
+	public List<TaskDefOperation> findByBaseCodeAndBaseProcessId(String condition, Object... args) {
 		List<TaskDefOperation> list = this.taskDefOperationDao.listBySQL(condition, args);
 		return list;
 	}
 
-	public TaskDefOperation findByBaseCodeAndBaseProcessIdOne(String condition, Object[] args) {
+	public TaskDefOperation findByBaseCodeAndBaseProcessIdOne(String condition, Object... args) {
 		List<TaskDefOperation> list = this.taskDefOperationDao.listBySQL(condition, args);
 		if (list.size() > 0) {
 			return (TaskDefOperation) list.get(0);

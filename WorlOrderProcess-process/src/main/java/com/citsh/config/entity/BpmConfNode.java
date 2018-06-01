@@ -1,15 +1,7 @@
 package com.citsh.config.entity;
-
-import com.citsh.assign.entity.BpmConfAssign;
-import com.citsh.form.entity.BpmConfForm;
-import com.citsh.listener.entity.BpmConfListener;
-import com.citsh.notice.entity.BpmConfNotice;
-import com.citsh.operation.entity.BpmConfOperation;
-import com.citsh.rule.entity.BpmConfRule;
-import com.citsh.user.entity.BpmConfUser;
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,269 +11,403 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.citsh.assign.entity.BpmConfAssign;
+import com.citsh.form.entity.BpmConfForm;
+import com.citsh.listener.entity.BpmConfListener;
+import com.citsh.notice.entity.BpmConfNotice;
+import com.citsh.operation.entity.BpmConfOperation;
+import com.citsh.rule.entity.BpmConfRule;
+import com.citsh.user.entity.BpmConfUser;
+
+/**
+ * BpmConfNode 节点配置.
+ */
 @Entity
-@Table(name="BPM_CONF_NODE")
-public class BpmConfNode
-  implements Serializable
-{
-  private static final long serialVersionUID = 0L;
-  private Long id;
-  private BpmConfBase bpmConfBase;
-  private String code;
-  private String name;
-  private String type;
-  private Integer confUser;
-  private Integer confListener;
-  private Integer confRule;
-  private Integer confForm;
-  private Integer confOperation;
-  private Integer confNotice;
-  private Integer priority;
-  private Set<BpmConfListener> bpmConfListeners = new HashSet(0);
+@Table(name = "BPM_CONF_NODE")
+public class BpmConfNode implements java.io.Serializable {
+    private static final long serialVersionUID = 0L;
 
-  private Set<BpmConfNotice> bpmConfNotices = new HashSet(0);
+    /** 主键. */
+    private Long id;
 
-  private Set<BpmConfUser> bpmConfUsers = new HashSet(0);
+    /** 外键，流程配置. */
+    private BpmConfBase bpmConfBase;
 
-  private Set<BpmConfAssign> bpmConfAssigns = new HashSet(0);
+    /** 节点ID. */
+    private String code;
 
-  private Set<BpmConfCountersign> bpmConfCountersigns = new HashSet(0);
+    /** 节点名称. */
+    private String name;
 
-  private Set<BpmConfForm> bpmConfForms = new HashSet(0);
+    /** 节点类型. */
+    private String type;
 
-  private Set<BpmConfRule> bpmConfRules = new HashSet(0);
+    /** 配置用户. */
+    private Integer confUser;
 
-  private Set<BpmConfOperation> bpmConfOperations = new HashSet(0);
+    /** 配置回调. */
+    private Integer confListener;
 
-  public BpmConfNode()
-  {
-  }
+    /** 配置规则. */
+    private Integer confRule;
 
-  public BpmConfNode(Long id) {
-    this.id = id;
-  }
+    /** 配置表单. */
+    private Integer confForm;
 
-  public BpmConfNode(Long id, BpmConfBase bpmConfBase, String code, String name, String type, Integer confUser, Integer confListener, Integer confRule, Integer confForm, Integer confOperation, Integer confNotice, Integer priority, Set<BpmConfListener> bpmConfListeners, Set<BpmConfNotice> bpmConfNotices, Set<BpmConfUser> bpmConfUsers, Set<BpmConfAssign> bpmConfAssigns, Set<BpmConfCountersign> bpmConfCountersigns, Set<BpmConfForm> bpmConfForms, Set<BpmConfRule> bpmConfRules, Set<BpmConfOperation> bpmConfOperations)
-  {
-    this.id = id;
-    this.bpmConfBase = bpmConfBase;
-    this.code = code;
-    this.name = name;
-    this.type = type;
-    this.confUser = confUser;
-    this.confListener = confListener;
-    this.confRule = confRule;
-    this.confForm = confForm;
-    this.confOperation = confOperation;
-    this.confNotice = confNotice;
-    this.priority = priority;
-    this.bpmConfListeners = bpmConfListeners;
-    this.bpmConfNotices = bpmConfNotices;
-    this.bpmConfUsers = bpmConfUsers;
-    this.bpmConfAssigns = bpmConfAssigns;
-    this.bpmConfCountersigns = bpmConfCountersigns;
-    this.bpmConfForms = bpmConfForms;
-    this.bpmConfRules = bpmConfRules;
-    this.bpmConfOperations = bpmConfOperations;
-  }
-  @Id
-  @Column(name="ID", unique=true, nullable=false)
-  public Long getId() {
-    return this.id;
-  }
+    /** 配置操作. */
+    private Integer confOperation;
 
-  public void setId(Long id)
-  {
-    this.id = id;
-  }
-  @ManyToOne(fetch=FetchType.LAZY)
-  @JoinColumn(name="CONF_BASE_ID")
-  public BpmConfBase getBpmConfBase() {
-    return this.bpmConfBase;
-  }
+    /** 配置提醒. */
+    private Integer confNotice;
 
-  public void setBpmConfBase(BpmConfBase bpmConfBase)
-  {
-    this.bpmConfBase = bpmConfBase;
-  }
+    /** 排序. */
+    private Integer priority;
 
-  @Column(name="CODE", length=200)
-  public String getCode() {
-    return this.code;
-  }
+    /** . */
+    private Set<BpmConfListener> bpmConfListeners = new HashSet<BpmConfListener>(0);
 
-  public void setCode(String code)
-  {
-    this.code = code;
-  }
+    /** . */
+    private Set<BpmConfNotice> bpmConfNotices = new HashSet<BpmConfNotice>(0);
 
-  @Column(name="NAME", length=200)
-  public String getName() {
-    return this.name;
-  }
+    /** . */
+    private Set<BpmConfUser> bpmConfUsers = new HashSet<BpmConfUser>(0);
 
-  public void setName(String name)
-  {
-    this.name = name;
-  }
+    /** . */
+    private Set<BpmConfAssign> bpmConfAssigns = new HashSet<BpmConfAssign>(0);
 
-  @Column(name="TYPE", length=200)
-  public String getType() {
-    return this.type;
-  }
+    /** . */
+    private Set<BpmConfCountersign> bpmConfCountersigns = new HashSet<BpmConfCountersign>(
+            0);
 
-  public void setType(String type)
-  {
-    this.type = type;
-  }
+    /** . */
+    private Set<BpmConfForm> bpmConfForms = new HashSet<BpmConfForm>(0);
 
-  @Column(name="CONF_USER")
-  public Integer getConfUser() {
-    return this.confUser;
-  }
+    /** . */
+    private Set<BpmConfRule> bpmConfRules = new HashSet<BpmConfRule>(0);
 
-  public void setConfUser(Integer confUser)
-  {
-    this.confUser = confUser;
-  }
+    /** . */
+    private Set<BpmConfOperation> bpmConfOperations = new HashSet<BpmConfOperation>(
+            0);
 
-  @Column(name="CONF_LISTENER")
-  public Integer getConfListener() {
-    return this.confListener;
-  }
+    public BpmConfNode() {
+    }
 
-  public void setConfListener(Integer confListener)
-  {
-    this.confListener = confListener;
-  }
+    public BpmConfNode(Long id) {
+        this.id = id;
+    }
 
-  @Column(name="CONF_RULE")
-  public Integer getConfRule() {
-    return this.confRule;
-  }
+    public BpmConfNode(Long id, BpmConfBase bpmConfBase, String code,
+            String name, String type, Integer confUser, Integer confListener,
+            Integer confRule, Integer confForm, Integer confOperation,
+            Integer confNotice, Integer priority,
+            Set<BpmConfListener> bpmConfListeners,
+            Set<BpmConfNotice> bpmConfNotices, Set<BpmConfUser> bpmConfUsers,
+            Set<BpmConfAssign> bpmConfAssigns,
+            Set<BpmConfCountersign> bpmConfCountersigns,
+            Set<BpmConfForm> bpmConfForms, Set<BpmConfRule> bpmConfRules,
+            Set<BpmConfOperation> bpmConfOperations) {
+        this.id = id;
+        this.bpmConfBase = bpmConfBase;
+        this.code = code;
+        this.name = name;
+        this.type = type;
+        this.confUser = confUser;
+        this.confListener = confListener;
+        this.confRule = confRule;
+        this.confForm = confForm;
+        this.confOperation = confOperation;
+        this.confNotice = confNotice;
+        this.priority = priority;
+        this.bpmConfListeners = bpmConfListeners;
+        this.bpmConfNotices = bpmConfNotices;
+        this.bpmConfUsers = bpmConfUsers;
+        this.bpmConfAssigns = bpmConfAssigns;
+        this.bpmConfCountersigns = bpmConfCountersigns;
+        this.bpmConfForms = bpmConfForms;
+        this.bpmConfRules = bpmConfRules;
+        this.bpmConfOperations = bpmConfOperations;
+    }
 
-  public void setConfRule(Integer confRule)
-  {
-    this.confRule = confRule;
-  }
+    /** @return 主键. */
+    @Id
+    @Column(name = "ID", unique = true, nullable = false)
+    public Long getId() {
+        return this.id;
+    }
 
-  @Column(name="CONF_FORM")
-  public Integer getConfForm() {
-    return this.confForm;
-  }
+    /**
+     * @param id
+     *            主键.
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-  public void setConfForm(Integer confForm)
-  {
-    this.confForm = confForm;
-  }
+    /** @return 外键，流程配置. */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CONF_BASE_ID")
+    public BpmConfBase getBpmConfBase() {
+        return this.bpmConfBase;
+    }
 
-  @Column(name="CONF_OPERATION")
-  public Integer getConfOperation() {
-    return this.confOperation;
-  }
+    /**
+     * @param bpmConfBase
+     *            外键，流程配置.
+     */
+    public void setBpmConfBase(BpmConfBase bpmConfBase) {
+        this.bpmConfBase = bpmConfBase;
+    }
 
-  public void setConfOperation(Integer confOperation)
-  {
-    this.confOperation = confOperation;
-  }
+    /** @return 节点ID. */
+    @Column(name = "CODE", length = 200)
+    public String getCode() {
+        return this.code;
+    }
 
-  @Column(name="CONF_NOTICE")
-  public Integer getConfNotice() {
-    return this.confNotice;
-  }
+    /**
+     * @param code
+     *            节点ID.
+     */
+    public void setCode(String code) {
+        this.code = code;
+    }
 
-  public void setConfNotice(Integer confNotice)
-  {
-    this.confNotice = confNotice;
-  }
+    /** @return 节点名称. */
+    @Column(name = "NAME", length = 200)
+    public String getName() {
+        return this.name;
+    }
 
-  @Column(name="PRIORITY")
-  public Integer getPriority() {
-    return this.priority;
-  }
+    /**
+     * @param name
+     *            节点名称.
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
-  public void setPriority(Integer priority)
-  {
-    this.priority = priority;
-  }
+    /** @return 节点类型. */
+    @Column(name = "TYPE", length = 200)
+    public String getType() {
+        return this.type;
+    }
 
-  @OneToMany(fetch=FetchType.LAZY, mappedBy="bpmConfNode")
-  public Set<BpmConfListener> getBpmConfListeners() {
-    return this.bpmConfListeners;
-  }
+    /**
+     * @param type
+     *            节点类型.
+     */
+    public void setType(String type) {
+        this.type = type;
+    }
 
-  public void setBpmConfListeners(Set<BpmConfListener> bpmConfListeners)
-  {
-    this.bpmConfListeners = bpmConfListeners;
-  }
+    /** @return 配置用户. */
+    @Column(name = "CONF_USER")
+    public Integer getConfUser() {
+        return this.confUser;
+    }
 
-  @OneToMany(fetch=FetchType.LAZY, mappedBy="bpmConfNode")
-  public Set<BpmConfNotice> getBpmConfNotices() {
-    return this.bpmConfNotices;
-  }
+    /**
+     * @param confUser
+     *            配置用户.
+     */
+    public void setConfUser(Integer confUser) {
+        this.confUser = confUser;
+    }
 
-  public void setBpmConfNotices(Set<BpmConfNotice> bpmConfNotices)
-  {
-    this.bpmConfNotices = bpmConfNotices;
-  }
+    /** @return 配置回调. */
+    @Column(name = "CONF_LISTENER")
+    public Integer getConfListener() {
+        return this.confListener;
+    }
 
-  @OneToMany(fetch=FetchType.LAZY, mappedBy="bpmConfNode")
-  public Set<BpmConfUser> getBpmConfUsers() {
-    return this.bpmConfUsers;
-  }
+    /**
+     * @param confListener
+     *            配置回调.
+     */
+    public void setConfListener(Integer confListener) {
+        this.confListener = confListener;
+    }
 
-  public void setBpmConfUsers(Set<BpmConfUser> bpmConfUsers)
-  {
-    this.bpmConfUsers = bpmConfUsers;
-  }
+    /** @return 配置规则. */
+    @Column(name = "CONF_RULE")
+    public Integer getConfRule() {
+        return this.confRule;
+    }
 
-  @OneToMany(fetch=FetchType.LAZY, mappedBy="bpmConfNode")
-  public Set<BpmConfAssign> getBpmConfAssigns() {
-    return this.bpmConfAssigns;
-  }
+    /**
+     * @param confRule
+     *            配置规则.
+     */
+    public void setConfRule(Integer confRule) {
+        this.confRule = confRule;
+    }
 
-  public void setBpmConfAssigns(Set<BpmConfAssign> bpmConfAssigns)
-  {
-    this.bpmConfAssigns = bpmConfAssigns;
-  }
+    /** @return 配置表单. */
+    @Column(name = "CONF_FORM")
+    public Integer getConfForm() {
+        return this.confForm;
+    }
 
-  @OneToMany(fetch=FetchType.LAZY, mappedBy="bpmConfNode")
-  public Set<BpmConfCountersign> getBpmConfCountersigns() {
-    return this.bpmConfCountersigns;
-  }
+    /**
+     * @param confForm
+     *            配置表单.
+     */
+    public void setConfForm(Integer confForm) {
+        this.confForm = confForm;
+    }
 
-  public void setBpmConfCountersigns(Set<BpmConfCountersign> bpmConfCountersigns)
-  {
-    this.bpmConfCountersigns = bpmConfCountersigns;
-  }
+    /** @return 配置操作. */
+    @Column(name = "CONF_OPERATION")
+    public Integer getConfOperation() {
+        return this.confOperation;
+    }
 
-  @OneToMany(fetch=FetchType.LAZY, mappedBy="bpmConfNode")
-  public Set<BpmConfForm> getBpmConfForms() {
-    return this.bpmConfForms;
-  }
+    /**
+     * @param confOperation
+     *            配置操作.
+     */
+    public void setConfOperation(Integer confOperation) {
+        this.confOperation = confOperation;
+    }
 
-  public void setBpmConfForms(Set<BpmConfForm> bpmConfForms)
-  {
-    this.bpmConfForms = bpmConfForms;
-  }
+    /** @return 配置提醒. */
+    @Column(name = "CONF_NOTICE")
+    public Integer getConfNotice() {
+        return this.confNotice;
+    }
 
-  @OneToMany(fetch=FetchType.LAZY, mappedBy="bpmConfNode")
-  public Set<BpmConfRule> getBpmConfRules() {
-    return this.bpmConfRules;
-  }
+    /**
+     * @param confNotice
+     *            配置提醒.
+     */
+    public void setConfNotice(Integer confNotice) {
+        this.confNotice = confNotice;
+    }
 
-  public void setBpmConfRules(Set<BpmConfRule> bpmConfRules)
-  {
-    this.bpmConfRules = bpmConfRules;
-  }
+    /** @return 排序. */
+    @Column(name = "PRIORITY")
+    public Integer getPriority() {
+        return this.priority;
+    }
 
-  @OneToMany(fetch=FetchType.LAZY, mappedBy="bpmConfNode")
-  public Set<BpmConfOperation> getBpmConfOperations() {
-    return this.bpmConfOperations;
-  }
+    /**
+     * @param priority
+     *            排序.
+     */
+    public void setPriority(Integer priority) {
+        this.priority = priority;
+    }
 
-  public void setBpmConfOperations(Set<BpmConfOperation> bpmConfOperations)
-  {
-    this.bpmConfOperations = bpmConfOperations;
-  }
+    /** @return . */
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "bpmConfNode")
+    public Set<BpmConfListener> getBpmConfListeners() {
+        return this.bpmConfListeners;
+    }
+
+    /**
+     * @param bpmConfListeners
+     *            .
+     */
+    public void setBpmConfListeners(Set<BpmConfListener> bpmConfListeners) {
+        this.bpmConfListeners = bpmConfListeners;
+    }
+
+    /** @return . */
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "bpmConfNode")
+    public Set<BpmConfNotice> getBpmConfNotices() {
+        return this.bpmConfNotices;
+    }
+
+    /**
+     * @param bpmConfNotices
+     *            .
+     */
+    public void setBpmConfNotices(Set<BpmConfNotice> bpmConfNotices) {
+        this.bpmConfNotices = bpmConfNotices;
+    }
+
+    /** @return . */
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "bpmConfNode")
+    public Set<BpmConfUser> getBpmConfUsers() {
+        return this.bpmConfUsers;
+    }
+
+    /**
+     * @param bpmConfUsers
+     *            .
+     */
+    public void setBpmConfUsers(Set<BpmConfUser> bpmConfUsers) {
+        this.bpmConfUsers = bpmConfUsers;
+    }
+
+    /** @return . */
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "bpmConfNode")
+    public Set<BpmConfAssign> getBpmConfAssigns() {
+        return this.bpmConfAssigns;
+    }
+
+    /**
+     * @param bpmConfAssigns
+     *            .
+     */
+    public void setBpmConfAssigns(Set<BpmConfAssign> bpmConfAssigns) {
+        this.bpmConfAssigns = bpmConfAssigns;
+    }
+
+    /** @return . */
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "bpmConfNode")
+    public Set<BpmConfCountersign> getBpmConfCountersigns() {
+        return this.bpmConfCountersigns;
+    }
+
+    /**
+     * @param bpmConfCountersigns
+     *            .
+     */
+    public void setBpmConfCountersigns(
+            Set<BpmConfCountersign> bpmConfCountersigns) {
+        this.bpmConfCountersigns = bpmConfCountersigns;
+    }
+
+    /** @return . */
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "bpmConfNode")
+    public Set<BpmConfForm> getBpmConfForms() {
+        return this.bpmConfForms;
+    }
+
+    /**
+     * @param bpmConfForms
+     *            .
+     */
+    public void setBpmConfForms(Set<BpmConfForm> bpmConfForms) {
+        this.bpmConfForms = bpmConfForms;
+    }
+
+    /** @return . */
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "bpmConfNode")
+    public Set<BpmConfRule> getBpmConfRules() {
+        return this.bpmConfRules;
+    }
+
+    /**
+     * @param bpmConfRules
+     *            .
+     */
+    public void setBpmConfRules(Set<BpmConfRule> bpmConfRules) {
+        this.bpmConfRules = bpmConfRules;
+    }
+
+    /** @return . */
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "bpmConfNode")
+    public Set<BpmConfOperation> getBpmConfOperations() {
+        return this.bpmConfOperations;
+    }
+
+    /**
+     * @param bpmConfOperations
+     *            .
+     */
+    public void setBpmConfOperations(Set<BpmConfOperation> bpmConfOperations) {
+        this.bpmConfOperations = bpmConfOperations;
+    }
 }

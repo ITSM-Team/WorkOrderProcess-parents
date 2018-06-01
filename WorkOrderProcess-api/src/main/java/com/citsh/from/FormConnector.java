@@ -8,5 +8,5 @@ public abstract interface FormConnector
 {
   public abstract List<FormDTO> getAll(String paramString);
 
-  public abstract FormDTO findForm(String paramString1, String paramString2);
+  public abstract FormDTO findForm(String code, String tenantId);
 }

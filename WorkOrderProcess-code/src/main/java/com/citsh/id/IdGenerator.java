@@ -1,5 +1,4 @@
 package com.citsh.id;
-
 public interface IdGenerator {
 	Long generateId();
 

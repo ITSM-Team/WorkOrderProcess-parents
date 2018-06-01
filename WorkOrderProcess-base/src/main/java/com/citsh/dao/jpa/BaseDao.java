@@ -1,47 +1,90 @@
 package com.citsh.dao.jpa;
-
-import com.citsh.page.Page;
-import com.citsh.query.PropertyFilter;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
-
+import com.citsh.page.Page;
+import com.citsh.query.PropertyFilter;
 @NoRepositoryBean
-public abstract interface BaseDao<T, ID extends Serializable> extends JpaRepository<T, ID>
-{
-  public abstract T add(T paramT);
-
-  public abstract T find(Long paramLong);
-
-  public abstract List<T> findAll();
-
-  public abstract long count();
-
-  public abstract List<T> listBySQL(String paramString);
-
-  public abstract List<T> listBySQL(String paramString, Object[] paramArrayOfObject);
-
-  public abstract void deleteById(Object paramObject);
-
-  public abstract void deleteByIds(Object[] paramArrayOfObject);
-
-  public abstract boolean update(T paramT);
-
-  public abstract boolean updateByCondition(String paramString1, String paramString2, Object[] paramArrayOfObject);
-  
-  public abstract Page pagedQuery(Page paramPage, List<PropertyFilter> paramList);
-
-  public abstract List<T> findBy(String paramString, Long paramLong);
-
-  public abstract T findOneBy(String paramString, Long paramLong);
-
-  public abstract List<T> listByMSQL(String paramString, Object[] paramArrayOfObject);
-
-  public abstract Page pageListByHSQL(String paramString, int paramInt1, int paramInt2, Object[] paramArrayOfObject);
-
-  public abstract Integer countByHSQL(String paramString, Object[] paramArrayOfObject);
-
-  public abstract Page pageListByHSQL(String paramString, int paramInt1, int paramInt2, Map<String, Object> paramMap);
+public interface BaseDao<T,ID extends Serializable> extends  JpaRepository<T,ID>{
+	/**
+     * 保存
+     * */
+	 public T add(T entity);
+	 /**
+	* 查询
+	* */
+	 public T find(Long id);
+	 
+	 /**
+	  * 查询集合
+	  * */
+	 public List<T> findAll();
+	 
+	 /**
+	  * 查询总数
+	  * */
+	 public long count();
+	 
+	 /**
+	  * 通过sql查询集合
+	  * */
+	 public List<T> listBySQL(String sql);
+	 
+	 /**
+	  * 通过sql查询集合
+	  * */
+	 public List<T> listBySQL(String condition,Object... objects);
+	 
+	 /**
+		 * 根据实体id删除
+		 * */
+	public void deleteById(Object entityId);
+	
+	/**
+	 * 根据实体id删除数组
+	 * */
+	public void deleteByIds(Object[] entityIds);
+	
+	/**
+	 * 修改
+	 * */
+	public boolean update(T entity);
+	
+	/**
+	 * 根据条件修改 
+	 * variable="xxx=?,xxx=?";//要修改的字段，参数用？
+	 * condition=" xxx=? and xxx=?";//条件 
+	 * updateByCondition(variable, condition, "参数1","参数2","参数3","参数4")
+	 * */
+	public boolean updateByCondition(String variable,String condition,Object... args);
+	
+	/**
+     * 分页查询函数，根据entityClass和page参数进行查询.
+     * 
+     * @param <T>
+     *            实体类型
+     * @param entityClass
+     *            实体类型
+     * @param page
+     *            分页里包含的各种参数
+     * @param criterions
+     *            条件
+     * @return 含总记录数和当前页数据的Page对象.
+     */
+    public Page pagedQuery(Page page,List<PropertyFilter> propertyFilters);
+    
+	/**
+	 * @param name 查询条件
+	 * @param entity 参数
+	 * */
+	public List<T> findBy(String name,Long id);
+	
+	public T findOneBy(String name,Long id);
+	
+	public  Page pageListByHSQL(String paramString, int paramInt1, int paramInt2, Object[] paramArrayOfObject);
+	
+	public Page pageListByHSQL(String hsql, int pageNo, int pageSize, Map<String, Object> map);
 }

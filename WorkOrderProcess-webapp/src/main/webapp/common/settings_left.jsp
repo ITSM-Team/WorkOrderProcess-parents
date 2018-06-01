@@ -37,8 +37,8 @@ $(function(){
 				<span><img src="${cdnPrefix}/template/images/process_design.png" /></span>流程设计
 			</div>
 			<ul class="menuson">
-				<li class="active"><cite></cite><a href="${ctx }/system/processDesign.jsp" target="rightFrame">流程设计器</a><i></i></li>
-				<li><cite></cite><a href="${ctx }/system/formDesign.jsp" target="rightFrame">表单设计器</a><i></i></li>
+				<li class="active"><cite></cite><a href="${ctx}/modeler/modeler-list.do" target="rightFrame">流程设计器</a><i></i></li>
+				<li><cite></cite><a href="${ctx }/form/form-template-list" target="rightFrame">表单设计器</a><i></i></li>
 			</ul>
 		</dd>
 		
@@ -47,7 +47,7 @@ $(function(){
 				<span><img src="${cdnPrefix}/template/images/process_management.png" /></span>流程管理
 			</div>
 			<ul class="menuson">
-				<li><cite></cite><a href="${ctx }/system/processDefinition.jsp" target="rightFrame">流程定义</a><i></i></li>
+				<li><cite></cite><a href="${ctx }/deploy/listProcessDefinitions" target="rightFrame">流程定义</a><i></i></li>
 				<li><cite></cite><a href="${ctx }/system/processDeployment.jsp" target="rightFrame">流程部署</a><i></i></li>
 				<li><cite></cite><a href="${ctx }/system/processSort.jsp" target="rightFrame">流程分类配置</a><i></i></li>
 				<li><cite></cite><a href="${ctx }/system/workOrderTimeoutReminder.jsp" target="rightFrame">工单超时提醒</a><i></i></li>

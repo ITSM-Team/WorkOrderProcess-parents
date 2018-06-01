@@ -17,7 +17,7 @@ public abstract interface TaskInfoService
 
   public abstract void save(TaskInfo paramTaskInfo);
 
-  public abstract Page pageQuery(String paramString, int paramInt1, int paramInt2, Object[] paramArrayOfObject);
+  public abstract Page pageQuery(String paramString, int paramInt1, int paramInt2, Object... paramArrayOfObject);
 
   public abstract Page pageQuery(int paramInt1, int paramInt2, Map<String, Object> paramMap);
 }

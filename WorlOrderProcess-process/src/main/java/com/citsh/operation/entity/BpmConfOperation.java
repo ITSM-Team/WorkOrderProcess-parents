@@ -1,7 +1,5 @@
 package com.citsh.operation.entity;
 
-import com.citsh.config.entity.BpmConfNode;
-import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,71 +8,98 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.citsh.config.entity.BpmConfNode;
+
+/**
+ * BpmConfOperation 配置操作.
+ */
 @Entity
-@Table(name="BPM_CONF_OPERATION")
-public class BpmConfOperation
-  implements Serializable
-{
-  private static final long serialVersionUID = 0L;
-  private Long id;
-  private BpmConfNode bpmConfNode;
-  private String value;
-  private Integer priority;
+@Table(name = "BPM_CONF_OPERATION")
+public class BpmConfOperation implements java.io.Serializable {
+    private static final long serialVersionUID = 0L;
 
-  public BpmConfOperation()
-  {
-  }
+    /** 主键. */
+    private Long id;
 
-  public BpmConfOperation(Long id)
-  {
-    this.id = id;
-  }
+    /** 外键，配置节点. */
+    private BpmConfNode bpmConfNode;
 
-  public BpmConfOperation(Long id, BpmConfNode bpmConfNode, String value, Integer priority)
-  {
-    this.id = id;
-    this.bpmConfNode = bpmConfNode;
-    this.value = value;
-    this.priority = priority;
-  }
-  @Id
-  @Column(name="ID", unique=true, nullable=false)
-  public Long getId() {
-    return this.id;
-  }
+    /** 值. */
+    private String value;
 
-  public void setId(Long id)
-  {
-    this.id = id;
-  }
-  @ManyToOne(fetch=FetchType.LAZY)
-  @JoinColumn(name="NODE_ID")
-  public BpmConfNode getBpmConfNode() {
-    return this.bpmConfNode;
-  }
+    /** 排序. */
+    private Integer priority;
 
-  public void setBpmConfNode(BpmConfNode bpmConfNode)
-  {
-    this.bpmConfNode = bpmConfNode;
-  }
+    public BpmConfOperation() {
+    }
 
-  @Column(name="VALUE", length=200)
-  public String getValue() {
-    return this.value;
-  }
+    public BpmConfOperation(Long id) {
+        this.id = id;
+    }
 
-  public void setValue(String value)
-  {
-    this.value = value;
-  }
+    public BpmConfOperation(Long id, BpmConfNode bpmConfNode, String value,
+            Integer priority) {
+        this.id = id;
+        this.bpmConfNode = bpmConfNode;
+        this.value = value;
+        this.priority = priority;
+    }
 
-  @Column(name="PRIORITY")
-  public Integer getPriority() {
-    return this.priority;
-  }
+    /** @return 主键. */
+    @Id
+    @Column(name = "ID", unique = true, nullable = false)
+    public Long getId() {
+        return this.id;
+    }
 
-  public void setPriority(Integer priority)
-  {
-    this.priority = priority;
-  }
+    /**
+     * @param id
+     *            主键.
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /** @return 外键，配置节点. */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "NODE_ID")
+    public BpmConfNode getBpmConfNode() {
+        return this.bpmConfNode;
+    }
+
+    /**
+     * @param bpmConfNode
+     *            外键，配置节点.
+     */
+    public void setBpmConfNode(BpmConfNode bpmConfNode) {
+        this.bpmConfNode = bpmConfNode;
+    }
+
+    /** @return 值. */
+    @Column(name = "VALUE", length = 200)
+    public String getValue() {
+        return this.value;
+    }
+
+    /**
+     * @param value
+     *            值.
+     */
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    /** @return 排序. */
+    @Column(name = "PRIORITY")
+    public Integer getPriority() {
+        return this.priority;
+    }
+
+    /**
+     * @param priority
+     *            排序.
+     */
+    public void setPriority(Integer priority) {
+        this.priority = priority;
+    }
 }

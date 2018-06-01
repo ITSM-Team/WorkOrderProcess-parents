@@ -11,22 +11,12 @@ public class Prop
   private static final long serialVersionUID = 1L;
 
   @Id
-  private ObjectId _id;
-
-  @Indexed
   private Long id;
   private String code;
   private int type;
   private String value;
   private long recordId;
 
-  public ObjectId get_id()
-  {
-    return this._id;
-  }
-  public void set_id(ObjectId _id) {
-    this._id = _id;
-  }
   public Long getId() {
     return this.id;
   }

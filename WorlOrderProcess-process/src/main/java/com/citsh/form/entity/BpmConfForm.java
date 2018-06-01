@@ -1,7 +1,6 @@
 package com.citsh.form.entity;
 
-import com.citsh.config.entity.BpmConfNode;
-import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,107 +9,153 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.citsh.config.entity.BpmConfNode;
+
+/**
+ * BpmConfForm 配置表单.
+ */
 @Entity
-@Table(name="BPM_CONF_FORM")
-public class BpmConfForm
-  implements Serializable
-{
-  private static final long serialVersionUID = 0L;
-  private Long id;
-  private BpmConfNode bpmConfNode;
-  private String value;
-  private Integer type;
-  private String originValue;
-  private Integer originType;
-  private Integer status;
+@Table(name = "BPM_CONF_FORM")
+public class BpmConfForm implements java.io.Serializable {
+    private static final long serialVersionUID = 0L;
 
-  public BpmConfForm()
-  {
-  }
+    /** 主键. */
+    private Long id;
 
-  public BpmConfForm(Long id)
-  {
-    this.id = id;
-  }
+    /** 外键，配置节点. */
+    private BpmConfNode bpmConfNode;
 
-  public BpmConfForm(Long id, BpmConfNode bpmConfNode, String value, Integer type, String originValue, Integer originType, Integer status)
-  {
-    this.id = id;
-    this.bpmConfNode = bpmConfNode;
-    this.value = value;
-    this.type = type;
-    this.originValue = originValue;
-    this.originType = originType;
-    this.status = status;
-  }
-  @Id
-  @Column(name="ID", unique=true, nullable=false)
-  public Long getId() {
-    return this.id;
-  }
+    /** 值. */
+    private String value;
 
-  public void setId(Long id)
-  {
-    this.id = id;
-  }
-  @ManyToOne(fetch=FetchType.LAZY)
-  @JoinColumn(name="NODE_ID")
-  public BpmConfNode getBpmConfNode() {
-    return this.bpmConfNode;
-  }
+    /** 分类. */
+    private Integer type;
 
-  public void setBpmConfNode(BpmConfNode bpmConfNode)
-  {
-    this.bpmConfNode = bpmConfNode;
-  }
+    /** 原始值. */
+    private String originValue;
 
-  @Column(name="VALUE", length=200)
-  public String getValue() {
-    return this.value;
-  }
+    /** 原始类型. */
+    private Integer originType;
 
-  public void setValue(String value)
-  {
-    this.value = value;
-  }
+    /** 状态. */
+    private Integer status;
 
-  @Column(name="TYPE")
-  public Integer getType() {
-    return this.type;
-  }
+    public BpmConfForm() {
+    }
 
-  public void setType(Integer type)
-  {
-    this.type = type;
-  }
+    public BpmConfForm(Long id) {
+        this.id = id;
+    }
 
-  @Column(name="ORIGIN_VALUE", length=200)
-  public String getOriginValue() {
-    return this.originValue;
-  }
+    public BpmConfForm(Long id, BpmConfNode bpmConfNode, String value,
+            Integer type, String originValue, Integer originType, Integer status) {
+        this.id = id;
+        this.bpmConfNode = bpmConfNode;
+        this.value = value;
+        this.type = type;
+        this.originValue = originValue;
+        this.originType = originType;
+        this.status = status;
+    }
 
-  public void setOriginValue(String originValue)
-  {
-    this.originValue = originValue;
-  }
+    /** @return 主键. */
+    @Id
+    @Column(name = "ID", unique = true, nullable = false)
+    public Long getId() {
+        return this.id;
+    }
 
-  @Column(name="ORIGIN_TYPE")
-  public Integer getOriginType() {
-    return this.originType;
-  }
+    /**
+     * @param id
+     *            主键.
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-  public void setOriginType(Integer originType)
-  {
-    this.originType = originType;
-  }
+    /** @return 外键，配置节点. */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "NODE_ID")
+    public BpmConfNode getBpmConfNode() {
+        return this.bpmConfNode;
+    }
 
-  @Column(name="STATUS")
-  public Integer getStatus() {
-    return this.status;
-  }
+    /**
+     * @param bpmConfNode
+     *            外键，配置节点.
+     */
+    public void setBpmConfNode(BpmConfNode bpmConfNode) {
+        this.bpmConfNode = bpmConfNode;
+    }
 
-  public void setStatus(Integer status)
-  {
-    this.status = status;
-  }
+    /** @return 值. */
+    @Column(name = "VALUE", length = 200)
+    public String getValue() {
+        return this.value;
+    }
+
+    /**
+     * @param value
+     *            值.
+     */
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    /** @return 分类. */
+    @Column(name = "TYPE")
+    public Integer getType() {
+        return this.type;
+    }
+
+    /**
+     * @param type
+     *            分类.
+     */
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    /** @return 原始值. */
+    @Column(name = "ORIGIN_VALUE", length = 200)
+    public String getOriginValue() {
+        return this.originValue;
+    }
+
+    /**
+     * @param originValue
+     *            原始值.
+     */
+    public void setOriginValue(String originValue) {
+        this.originValue = originValue;
+    }
+
+    /** @return 原始类型. */
+    @Column(name = "ORIGIN_TYPE")
+    public Integer getOriginType() {
+        return this.originType;
+    }
+
+    /**
+     * @param originType
+     *            原始类型.
+     */
+    public void setOriginType(Integer originType) {
+        this.originType = originType;
+    }
+
+    /** @return 状态. */
+    @Column(name = "STATUS")
+    public Integer getStatus() {
+        return this.status;
+    }
+
+    /**
+     * @param status
+     *            状态.
+     */
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 }
+

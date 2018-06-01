@@ -1,8 +1,6 @@
 package com.citsh.config.entity;
-
-import com.citsh.process.entity.BpmProcess;
-import java.io.Serializable;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,131 +11,190 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.citsh.process.entity.BpmProcess;
+
+/**
+ * BpmInstance 流程实例.
+ */
 @Entity
-@Table(name="BPM_INSTANCE")
-public class BpmInstance
-  implements Serializable
-{
-  private static final long serialVersionUID = 0L;
-  private Long id;
-  private BpmProcess bpmProcess;
-  private String name;
-  private String businessKey;
-  private String ref;
-  private Date createTime;
-  private String initiator;
-  private Integer priority;
-  private String tenantId;
+@Table(name = "BPM_INSTANCE")
+public class BpmInstance implements java.io.Serializable {
+    private static final long serialVersionUID = 0L;
 
-  public BpmInstance()
-  {
-  }
+    /** 主键. */
+    private Long id;
 
-  public BpmInstance(Long id)
-  {
-    this.id = id;
-  }
+    /** 外键，流程定义. */
+    private BpmProcess bpmProcess;
 
-  public BpmInstance(Long id, BpmProcess bpmProcess, String name, String businessKey, String ref, Date createTime, String initiator, Integer priority, String tenantId)
-  {
-    this.id = id;
-    this.bpmProcess = bpmProcess;
-    this.name = name;
-    this.businessKey = businessKey;
-    this.ref = ref;
-    this.createTime = createTime;
-    this.initiator = initiator;
-    this.priority = priority;
-    this.tenantId = tenantId;
-  }
-  @Id
-  @Column(name="ID", unique=true, nullable=false)
-  public Long getId() {
-    return this.id;
-  }
+    /** 名称. */
+    private String name;
 
-  public void setId(Long id)
-  {
-    this.id = id;
-  }
-  @ManyToOne(fetch=FetchType.LAZY)
-  @JoinColumn(name="PROCESS_ID")
-  public BpmProcess getBpmProcess() {
-    return this.bpmProcess;
-  }
+    /** 业务标识. */
+    private String businessKey;
 
-  public void setBpmProcess(BpmProcess bpmProcess)
-  {
-    this.bpmProcess = bpmProcess;
-  }
+    /** 外部引用. */
+    private String ref;
 
-  @Column(name="NAME", length=200)
-  public String getName() {
-    return this.name;
-  }
+    /** 创建时间. */
+    private Date createTime;
 
-  public void setName(String name)
-  {
-    this.name = name;
-  }
+    /** 发起人. */
+    private String initiator;
 
-  @Column(name="BUSINESS_KEY", length=64)
-  public String getBusinessKey() {
-    return this.businessKey;
-  }
+    /** 优先级. */
+    private Integer priority;
 
-  public void setBusinessKey(String businessKey)
-  {
-    this.businessKey = businessKey;
-  }
+    /** 租户. */
+    private String tenantId;
 
-  @Column(name="REF", length=64)
-  public String getRef() {
-    return this.ref;
-  }
+    public BpmInstance() {
+    }
 
-  public void setRef(String ref)
-  {
-    this.ref = ref;
-  }
-  @Temporal(TemporalType.TIMESTAMP)
-  @Column(name="CREATE_TIME", length=26)
-  public Date getCreateTime() {
-    return this.createTime;
-  }
+    public BpmInstance(Long id) {
+        this.id = id;
+    }
 
-  public void setCreateTime(Date createTime)
-  {
-    this.createTime = createTime;
-  }
+    public BpmInstance(Long id, BpmProcess bpmProcess, String name,
+            String businessKey, String ref, Date createTime, String initiator,
+            Integer priority, String tenantId) {
+        this.id = id;
+        this.bpmProcess = bpmProcess;
+        this.name = name;
+        this.businessKey = businessKey;
+        this.ref = ref;
+        this.createTime = createTime;
+        this.initiator = initiator;
+        this.priority = priority;
+        this.tenantId = tenantId;
+    }
 
-  @Column(name="INITIATOR", length=64)
-  public String getInitiator() {
-    return this.initiator;
-  }
+    /** @return 主键. */
+    @Id
+    @Column(name = "ID", unique = true, nullable = false)
+    public Long getId() {
+        return this.id;
+    }
 
-  public void setInitiator(String initiator)
-  {
-    this.initiator = initiator;
-  }
+    /**
+     * @param id
+     *            主键.
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-  @Column(name="PRIORITY")
-  public Integer getPriority() {
-    return this.priority;
-  }
+    /** @return 外键，流程定义. */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PROCESS_ID")
+    public BpmProcess getBpmProcess() {
+        return this.bpmProcess;
+    }
 
-  public void setPriority(Integer priority)
-  {
-    this.priority = priority;
-  }
+    /**
+     * @param bpmProcess
+     *            外键，流程定义.
+     */
+    public void setBpmProcess(BpmProcess bpmProcess) {
+        this.bpmProcess = bpmProcess;
+    }
 
-  @Column(name="TENANT_ID", length=64)
-  public String getTenantId() {
-    return this.tenantId;
-  }
+    /** @return 名称. */
+    @Column(name = "NAME", length = 200)
+    public String getName() {
+        return this.name;
+    }
 
-  public void setTenantId(String tenantId)
-  {
-    this.tenantId = tenantId;
-  }
+    /**
+     * @param name
+     *            名称.
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /** @return 业务标识. */
+    @Column(name = "BUSINESS_KEY", length = 64)
+    public String getBusinessKey() {
+        return this.businessKey;
+    }
+
+    /**
+     * @param businessKey
+     *            业务标识.
+     */
+    public void setBusinessKey(String businessKey) {
+        this.businessKey = businessKey;
+    }
+
+    /** @return 外部引用. */
+    @Column(name = "REF", length = 64)
+    public String getRef() {
+        return this.ref;
+    }
+
+    /**
+     * @param ref
+     *            外部引用.
+     */
+    public void setRef(String ref) {
+        this.ref = ref;
+    }
+
+    /** @return 创建时间. */
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "CREATE_TIME", length = 26)
+    public Date getCreateTime() {
+        return this.createTime;
+    }
+
+    /**
+     * @param createTime
+     *            创建时间.
+     */
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    /** @return 发起人. */
+    @Column(name = "INITIATOR", length = 64)
+    public String getInitiator() {
+        return this.initiator;
+    }
+
+    /**
+     * @param initiator
+     *            发起人.
+     */
+    public void setInitiator(String initiator) {
+        this.initiator = initiator;
+    }
+
+    /** @return 优先级. */
+    @Column(name = "PRIORITY")
+    public Integer getPriority() {
+        return this.priority;
+    }
+
+    /**
+     * @param priority
+     *            优先级.
+     */
+    public void setPriority(Integer priority) {
+        this.priority = priority;
+    }
+
+    /** @return 租户. */
+    @Column(name = "TENANT_ID", length = 64)
+    public String getTenantId() {
+        return this.tenantId;
+    }
+
+    /**
+     * @param tenantId
+     *            租户.
+     */
+    public void setTenantId(String tenantId) {
+        this.tenantId = tenantId;
+    }
 }

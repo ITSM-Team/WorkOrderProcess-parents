@@ -1,4 +1,12 @@
 package com.citsh.base.service.impl;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.citsh.base.entity.TaskConfUser;
 import com.citsh.base.entity.TaskDefBase;
@@ -20,53 +28,43 @@ import com.citsh.humantask.TaskDefinitionDTO;
 import com.citsh.humantask.TaskNotificationDTO;
 import com.citsh.humantask.TaskUserDTO;
 import com.citsh.id.IdGenerator;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 @Service
 public class TaskDefinitionServiceImpl implements TaskDefinitionService {
 	private static Logger logger = LoggerFactory.getLogger(TaskDefinitionServiceImpl.class);
-
 	@Autowired
 	private TaskDefBaseService taskDefBaseService;
-
 	@Autowired
 	private TaskDefOperationService taskDefOperationService;
-
 	@Autowired
 	private TaskDefUserService taskDefUserService;
-
 	@Autowired
 	private TaskDefDeadlineService taskDefDeadlineService;
-
 	@Autowired
 	private TaskConfUserService taskConfUserService;
-
 	@Autowired
 	private TaskDefNotificationService taskDefNotificationService;
-
 	@Autowired
 	private IdGenerator idGenerator;
 
+	/**
+	 * 分配策略.
+	 */
 	public String findTaskAssignStrategy(String taskDefinitionKey, String processDefinitionId) {
-		TaskDefBase taskDefBase = this.taskDefBaseService.findByCodeAndProIdOne("code=? and processDefinitionId=?",
-				new Object[] { taskDefinitionKey, processDefinitionId });
-
+		TaskDefBase taskDefBase = taskDefBaseService.findByCodeAndProIdOne("code=? and processDefinitionId=?",
+				taskDefinitionKey, processDefinitionId);
 		if (taskDefBase == null) {
 			return null;
 		}
 		return taskDefBase.getAssignStrategy();
 	}
 
+	/**
+	 * 会签.
+	 */
 	public CounterSignDTO findCounterSign(String taskDefinitionKey, String processDefinitionId) {
-		TaskDefBase taskDefBase = this.taskDefBaseService.findByCodeAndProIdOne("code=? and processDefinitionId=?",
-				new Object[] { taskDefinitionKey, processDefinitionId });
-
+		TaskDefBase taskDefBase = taskDefBaseService.findByCodeAndProIdOne("code=? and processDefinitionId=?",
+				taskDefinitionKey, processDefinitionId);
 		if (taskDefBase == null) {
 			return null;
 		}
@@ -74,14 +72,16 @@ public class TaskDefinitionServiceImpl implements TaskDefinitionService {
 		counterSignDto.setType(taskDefBase.getCountersignType());
 		counterSignDto.setParticipants(taskDefBase.getCountersignUser());
 		counterSignDto.setStrategy(taskDefBase.getCountersignStrategy());
-		counterSignDto.setRate(taskDefBase.getCountersignRate().intValue());
+		counterSignDto.setRate(taskDefBase.getCountersignRate());
 		return counterSignDto;
 	}
 
+	/**
+	 * 表单.
+	 */
 	public FormDTO findForm(String taskDefinitionKey, String processDefinitionId) {
-		TaskDefBase taskDefBase = this.taskDefBaseService.findByCodeAndProIdOne("code=? and processDefinitionId=?",
-				new Object[] { taskDefinitionKey, processDefinitionId });
-
+		TaskDefBase taskDefBase = taskDefBaseService.findByCodeAndProIdOne("code=? and processDefinitionId=?",
+				taskDefinitionKey, processDefinitionId);
 		if (taskDefBase == null) {
 			return null;
 		}
@@ -94,11 +94,12 @@ public class TaskDefinitionServiceImpl implements TaskDefinitionService {
 		return formDto;
 	}
 
+	/**
+	 * 操作.
+	 */
 	public List<String> findOperations(String taskDefinitionKey, String processDefinitionId) {
-		List<TaskDefOperation> taskDefOperations = this.taskDefOperationService.findByBaseCodeAndBaseProcessId(
-				"taskDefBase.code=? and taskDefBase.processDefinitionId=?",
-				new Object[] { taskDefinitionKey, processDefinitionId });
-
+		List<TaskDefOperation> taskDefOperations = taskDefOperationService.findByBaseCodeAndBaseProcessId(
+				"taskDefBase.code=? and taskDefBase.processDefinitionId=?", taskDefinitionKey, processDefinitionId);
 		if (taskDefOperations.isEmpty()) {
 			return Collections.emptyList();
 		}
@@ -109,11 +110,12 @@ public class TaskDefinitionServiceImpl implements TaskDefinitionService {
 		return list;
 	}
 
+	/**
+	 * 参与者.
+	 */
 	public List<TaskUserDTO> findTaskUsers(String taskDefinitionKey, String processDefinitionId) {
-		List<TaskDefUser> taskDefUsers = this.taskDefUserService.findByBaseCodeAndBaseProcessId(
-				" taskDefBase.code=? and taskDefBase.processDefinitionId=?",
-				new Object[] { taskDefinitionKey, processDefinitionId });
-
+		List<TaskDefUser> taskDefUsers = taskDefUserService.findByBaseCodeAndBaseProcessId(
+				" taskDefBase.code=? and taskDefBase.processDefinitionId=?", taskDefinitionKey, processDefinitionId);
 		if (taskDefUsers.isEmpty()) {
 			return Collections.emptyList();
 		}
@@ -131,11 +133,12 @@ public class TaskDefinitionServiceImpl implements TaskDefinitionService {
 		return taskUserDtos;
 	}
 
+	/**
+	 * 截止日期.
+	 */
 	public List<DeadlineDTO> findDeadlines(String taskDefinitionKey, String processDefinitionId) {
-		List<TaskDefDeadline> taskDefDeadlines = this.taskDefDeadlineService.findByBaseCodeAndBaseProcessId(
-				"taskDefBase.code=? and taskDefBase.processDefinitionId=?",
-				new Object[] { taskDefinitionKey, processDefinitionId });
-
+		List<TaskDefDeadline> taskDefDeadlines = taskDefDeadlineService.findByBaseCodeAndBaseProcessId(
+				"taskDefBase.code=? and taskDefBase.processDefinitionId=?", taskDefinitionKey, processDefinitionId);
 		if (taskDefDeadlines.isEmpty()) {
 			return Collections.emptyList();
 		}
@@ -152,10 +155,12 @@ public class TaskDefinitionServiceImpl implements TaskDefinitionService {
 		return deadlines;
 	}
 
+	/**
+	 * 实例对应的参与者.
+	 */
 	public String findTaskConfUser(String taskDefinitionKey, String businessKey) {
-		TaskConfUser taskConfUser = this.taskConfUserService.findByCodeAndProIdOne(" code=? and businessKey=?",
-				new Object[] { taskDefinitionKey, businessKey });
-
+		TaskConfUser taskConfUser = taskConfUserService.findByCodeAndProIdOne(" code=? and businessKey=?",
+				taskDefinitionKey, businessKey);
 		if (taskConfUser == null) {
 			return null;
 		}
@@ -163,12 +168,14 @@ public class TaskDefinitionServiceImpl implements TaskDefinitionService {
 		return taskConfUser.getValue();
 	}
 
+	/**
+	 * 提醒.
+	 */
 	public List<TaskNotificationDTO> findTaskNotifications(String taskDefinitionKey, String processDefinitionId,
 			String eventName) {
-		List<TaskDefNotification> taskDefNotifications = this.taskDefNotificationService.findByBaseCodeAndBaseProcessId(
-				" taskDefBase.code=? and taskDefBase.processDefinitionId=? and eventName=?",
-				new Object[] { taskDefinitionKey, processDefinitionId, eventName });
-
+		List<TaskDefNotification> taskDefNotifications = taskDefNotificationService.findByBaseCodeAndBaseProcessId(
+				" taskDefBase.code=? and taskDefBase.processDefinitionId=? and eventName=?", taskDefinitionKey,
+				processDefinitionId, eventName);
 		if (taskDefNotifications.isEmpty()) {
 			return Collections.emptyList();
 		}
@@ -189,16 +196,15 @@ public class TaskDefinitionServiceImpl implements TaskDefinitionService {
 		String processDefinitionId = taskDefinition.getProcessDefinitionId();
 		String processDefinitionKey = processDefinitionId.split("\\:")[0];
 		int processDefinitionVersion = Integer.parseInt(processDefinitionId.split("\\:")[1]);
-		TaskDefBase taskDefBase = this.taskDefBaseService.findByCodeAndProIdOne(
-				"code=? and processDefinitionKey=? and processDefinitionVersion=?", new Object[] {
-						taskDefinition.getCode(), processDefinitionKey, Integer.valueOf(processDefinitionVersion) });
-
+		TaskDefBase taskDefBase = taskDefBaseService.findByCodeAndProIdOne(
+				"code=? and processDefinitionKey=? and processDefinitionVersion=?", taskDefinition.getCode(),
+				processDefinitionKey, processDefinitionVersion);
 		if (taskDefBase == null) {
 			taskDefBase = new TaskDefBase();
-			taskDefBase.setId(this.idGenerator.generateId());
+			taskDefBase.setId(idGenerator.generateId());
 			taskDefBase.setCode(taskDefinition.getCode());
 			taskDefBase.setProcessDefinitionKey(processDefinitionKey);
-			taskDefBase.setProcessDefinitionVersion(Integer.valueOf(processDefinitionVersion));
+			taskDefBase.setProcessDefinitionVersion(processDefinitionVersion);
 		}
 		if (taskDefBase.getProcessDefinitionId() == null) {
 			taskDefBase.setProcessDefinitionId(processDefinitionId);
@@ -214,49 +220,52 @@ public class TaskDefinitionServiceImpl implements TaskDefinitionService {
 			taskDefBase.setCountersignType(taskDefinition.getCounterSign().getType());
 			taskDefBase.setCountersignUser(taskDefinition.getCounterSign().getParticipants());
 			taskDefBase.setCountersignStrategy(taskDefinition.getCounterSign().getStrategy());
-			taskDefBase.setCountersignRate(Integer.valueOf(taskDefinition.getCounterSign().getRate()));
+			taskDefBase.setCountersignRate(taskDefinition.getCounterSign().getRate());
 		}
-		this.taskDefBaseService.save(taskDefBase);
+		taskDefBaseService.save(taskDefBase);
 		for (TaskUserDTO taskUser : taskDefinition.getTaskUsers()) {
 			String value = taskUser.getValue();
 			String type = taskUser.getType();
 			String catalog = taskUser.getCatalog();
 			if (value == null) {
-				logger.info("skip : {} {} {}", new Object[] { value, type, catalog });
+				logger.info("skip : {} {} {}", value, type, catalog);
 				continue;
 			}
-			TaskDefUser taskDefUser = this.taskDefUserService.findByBaseCodeAndBaseProcessIdOne(
-					"taskDefBase=? and value=? and type=? and catalog=?",
-					new Object[] { taskDefBase, value, type, catalog });
-
+			TaskDefUser taskDefUser = taskDefUserService.findByBaseCodeAndBaseProcessIdOne(
+					"taskDefBase=? and value=? and type=? and catalog=?", taskDefBase, value, type, catalog);
 			if (taskDefUser != null) {
 				continue;
 			}
 			taskDefUser = new TaskDefUser();
-			taskDefUser.setId(this.idGenerator.generateId());
+			taskDefUser.setId(idGenerator.generateId());
 			taskDefUser.setType(type);
 			taskDefUser.setCatalog(catalog);
 			taskDefUser.setValue(value);
 			taskDefUser.setTaskDefBase(taskDefBase);
-			this.taskDefUserService.save(taskDefUser);
+			taskDefUserService.save(taskDefUser);
 		}
 	}
 
+	/**
+	 * 保存分配策略.
+	 */
 	public void saveAssignStrategy(String taskDefinitionKey, String processDefinitoinId, String assigneeStrategy) {
-		TaskDefBase taskDefBase = this.taskDefBaseService.findByCodeAndProIdOne("code=? and processDefinitionId=?",
-				new Object[] { taskDefinitionKey, processDefinitoinId });
-
+		TaskDefBase taskDefBase = taskDefBaseService.findByCodeAndProIdOne("code=? and processDefinitionId=?",
+				taskDefinitionKey, processDefinitoinId);
 		if (taskDefBase == null) {
 			return;
 		}
 		taskDefBase.setAssignStrategy(assigneeStrategy);
-		this.taskDefBaseService.save(taskDefBase);
+		taskDefBaseService.save(taskDefBase);
+
 	}
 
+	/**
+	 * 保存会签.
+	 */
 	public void saveCounterSign(String taskDefinitionKey, String processDefinitionId, CounterSignDTO counterSign) {
-		TaskDefBase taskDefBase = this.taskDefBaseService.findByCodeAndProIdOne("code=? and processDefinitionId=?",
-				new Object[] { taskDefinitionKey, processDefinitionId });
-
+		TaskDefBase taskDefBase = taskDefBaseService.findByCodeAndProIdOne("code=? and processDefinitionId=?",
+				taskDefinitionKey, processDefinitionId);
 		if (taskDefBase == null) {
 			return;
 		}
@@ -264,15 +273,18 @@ public class TaskDefinitionServiceImpl implements TaskDefinitionService {
 			taskDefBase.setCountersignStrategy(counterSign.getStrategy());
 		}
 		if (counterSign.getRate() != 0) {
-			taskDefBase.setCountersignRate(Integer.valueOf(counterSign.getRate()));
+			taskDefBase.setCountersignRate(counterSign.getRate());
 		}
-		this.taskDefBaseService.save(taskDefBase);
+		taskDefBaseService.save(taskDefBase);
+
 	}
 
+	/**
+	 * 保存表单.
+	 */
 	public void saveForm(String taskDefinitionKey, String processDefinitionId, FormDTO form) {
-		TaskDefBase taskDefBase = this.taskDefBaseService.findByCodeAndProIdOne("code=? and processDefinitionId=?",
-				new Object[] { taskDefinitionKey, processDefinitionId });
-
+		TaskDefBase taskDefBase = taskDefBaseService.findByCodeAndProIdOne("code=? and processDefinitionId=?",
+				taskDefinitionKey, processDefinitionId);
 		if (taskDefBase == null) {
 			return;
 		}
@@ -282,128 +294,139 @@ public class TaskDefinitionServiceImpl implements TaskDefinitionService {
 		if (form.getType() != null) {
 			taskDefBase.setFormType(form.getType());
 		}
-		this.taskDefBaseService.save(taskDefBase);
+		taskDefBaseService.save(taskDefBase);
+
 	}
 
+	/**
+	 * 添加操作.
+	 */
 	public void addOperation(String taskDefinitionKey, String processDefinitionId, String operation) {
-		TaskDefBase taskDefBase = this.taskDefBaseService.findByCodeAndProIdOne("code=? and processDefinitionId=?",
-				new Object[] { taskDefinitionKey, processDefinitionId });
-
+		TaskDefBase taskDefBase = taskDefBaseService.findByCodeAndProIdOne("code=? and processDefinitionId=?",
+				taskDefinitionKey, processDefinitionId);
 		if (taskDefBase == null) {
 			return;
 		}
-
-		TaskDefOperation taskDefOperation = this.taskDefOperationService.findByBaseCodeAndBaseProcessIdOne(
-				" taskDefBase=? and value=?", new Object[] { taskDefBase, operation });
-
+		TaskDefOperation taskDefOperation = taskDefOperationService
+				.findByBaseCodeAndBaseProcessIdOne(" taskDefBase=? and value=?", taskDefBase, operation);
 		if (taskDefOperation != null) {
 			return;
 		}
 		taskDefOperation = new TaskDefOperation();
-		taskDefOperation.setId(this.idGenerator.generateId());
+		taskDefOperation.setId(idGenerator.generateId());
 		taskDefOperation.setTaskDefBase(taskDefBase);
 		taskDefOperation.setValue(operation);
-		this.taskDefOperationService.save(taskDefOperation);
+		taskDefOperationService.save(taskDefOperation);
+
 	}
 
+	/**
+	 * 删除操作
+	 */
 	public void removeOperation(String taskDefinitionKey, String processDefinitionId, String operation) {
-		TaskDefBase taskDefBase = this.taskDefBaseService.findByCodeAndProIdOne("code=? and processDefinitionId=?",
-				new Object[] { taskDefinitionKey, processDefinitionId });
-
+		TaskDefBase taskDefBase = taskDefBaseService.findByCodeAndProIdOne("code=? and processDefinitionId=?",
+				taskDefinitionKey, processDefinitionId);
 		if (taskDefBase == null) {
 			return;
 		}
-
-		TaskDefOperation taskDefOperation = this.taskDefOperationService.findByBaseCodeAndBaseProcessIdOne(
-				" taskDefBase=? and value=?", new Object[] { taskDefBase, operation });
-
+		TaskDefOperation taskDefOperation = taskDefOperationService
+				.findByBaseCodeAndBaseProcessIdOne(" taskDefBase=? and value=?", taskDefBase, operation);
 		if (taskDefOperation == null) {
 			return;
 		}
 
-		this.taskDefOperationService.remove(taskDefOperation);
+		taskDefOperationService.remove(taskDefOperation);
+
 	}
 
+	/**
+	 * 添加参与者.
+	 */
 	public void addTaskUser(String taskDefinitionKey, String processDefinitionId, TaskUserDTO taskUser) {
-		TaskDefBase taskDefBase = this.taskDefBaseService.findByCodeAndProIdOne("code=? and processDefinitionId=?",
-				new Object[] { taskDefinitionKey, processDefinitionId });
-
+		TaskDefBase taskDefBase = taskDefBaseService.findByCodeAndProIdOne("code=? and processDefinitionId=?",
+				taskDefinitionKey, processDefinitionId);
 		if (taskDefBase == null) {
 			logger.info("cannot find taskDefBase {} {}", taskDefinitionKey, processDefinitionId);
 			return;
 		}
-		TaskDefUser taskDefUser = this.taskDefUserService.findByBaseCodeAndBaseProcessIdOne(
-				" taskDefBase=? and catalog=? and type=? and value=?",
-				new Object[] { taskDefBase, taskUser.getCatalog(), taskUser.getType(), taskUser.getValue() });
+		TaskDefUser taskDefUser = taskDefUserService.findByBaseCodeAndBaseProcessIdOne(
+				" taskDefBase=? and catalog=? and type=? and value=?", taskDefBase, taskUser.getCatalog(),
+				taskUser.getType(), taskUser.getValue());
 		if (taskDefUser != null) {
-			logger.info("cannot find taskDefUser {} {} {} {}", new Object[] { taskDefBase.getId(),
-					taskUser.getCatalog(), taskUser.getType(), taskUser.getValue() });
+			logger.info("cannot find taskDefUser {} {} {} {}", taskDefBase.getId(), taskUser.getCatalog(),
+					taskUser.getType(), taskUser.getValue());
 			return;
 		}
 		taskDefUser = new TaskDefUser();
-		taskDefUser.setId(this.idGenerator.generateId());
+		taskDefUser.setId(idGenerator.generateId());
 		taskDefUser.setTaskDefBase(taskDefBase);
 		taskDefUser.setCatalog(taskUser.getCatalog());
 		taskDefUser.setType(taskUser.getType());
 		taskDefUser.setValue(taskUser.getValue());
-		this.taskDefUserService.save(taskDefUser);
+		taskDefUserService.save(taskDefUser);
+
 	}
 
 	public void removeTaskUser(String taskDefinitionKey, String processDefinitionId, TaskUserDTO taskUser) {
-		TaskDefBase taskDefBase = this.taskDefBaseService.findByCodeAndProIdOne("code=? and processDefinitionId=?",
-				new Object[] { taskDefinitionKey, processDefinitionId });
-
+		TaskDefBase taskDefBase = taskDefBaseService.findByCodeAndProIdOne("code=? and processDefinitionId=?",
+				taskDefinitionKey, processDefinitionId);
 		if (taskDefBase == null) {
 			logger.info("cannot find taskDefBase {} {}", taskDefinitionKey, processDefinitionId);
 			return;
 		}
-		TaskDefUser taskDefUser = this.taskDefUserService.findByBaseCodeAndBaseProcessIdOne(
-				" taskDefBase=? and catalog=? and type=? and value=?",
-				new Object[] { taskDefBase, taskUser.getCatalog(), taskUser.getType(), taskUser.getValue() });
+		TaskDefUser taskDefUser = taskDefUserService.findByBaseCodeAndBaseProcessIdOne(
+				" taskDefBase=? and catalog=? and type=? and value=?", taskDefBase, taskUser.getCatalog(),
+				taskUser.getType(), taskUser.getValue());
 		if (taskDefUser == null) {
-			logger.info("cannot find taskDefUser {} {} {} {}", new Object[] { taskDefBase.getId(),
-					taskUser.getCatalog(), taskUser.getType(), taskUser.getValue() });
+			logger.info("cannot find taskDefUser {} {} {} {}", taskDefBase.getId(), taskUser.getCatalog(),
+					taskUser.getType(), taskUser.getValue());
 			return;
 		}
-		this.taskDefUserService.remover(taskDefUser);
+		taskDefUserService.remover(taskDefUser);
+
 	}
 
+	/**
+	 * 更新参与者.
+	 */
 	public void updateTaskUser(String taskDefinitionKey, String processDefinitionId, TaskUserDTO taskUser,
 			String status) {
-		TaskDefBase taskDefBase = this.taskDefBaseService.findByCodeAndProIdOne("code=? and processDefinitionId=?",
-				new Object[] { taskDefinitionKey, processDefinitionId });
-
+		TaskDefBase taskDefBase = taskDefBaseService.findByCodeAndProIdOne("code=? and processDefinitionId=?",
+				taskDefinitionKey, processDefinitionId);
 		if (taskDefBase == null) {
 			logger.info("cannot find taskDefBase {} {}", taskDefinitionKey, processDefinitionId);
 			return;
 		}
-		TaskDefUser taskDefUser = this.taskDefUserService.findByBaseCodeAndBaseProcessIdOne(
-				" taskDefBase=? and catalog=? and type=? and value=?",
-				new Object[] { taskDefBase, taskUser.getCatalog(), taskUser.getType(), taskUser.getValue() });
+		TaskDefUser taskDefUser = taskDefUserService.findByBaseCodeAndBaseProcessIdOne(
+				" taskDefBase=? and catalog=? and type=? and value=?", taskDefBase, taskUser.getCatalog(),
+				taskUser.getType(), taskUser.getValue());
 		if (taskDefUser == null) {
-			logger.info("cannot find taskDefUser {} {} {} {}", new Object[] { taskDefBase.getId(),
-					taskUser.getCatalog(), taskUser.getType(), taskUser.getValue() });
+			logger.info("cannot find taskDefUser {} {} {} {}", taskDefBase.getId(), taskUser.getCatalog(),
+					taskUser.getType(), taskUser.getValue());
 			return;
 		}
 		taskDefUser.setStatus(status);
-		this.taskDefUserService.update(taskDefUser);
+		taskDefUserService.update(taskDefUser);
+
 	}
 
+	/**
+	 * 添加提醒.
+	 */
 	public void addTaskNotification(String taskDefinitionKey, String processDefinitionId,
 			TaskNotificationDTO taskNotification) {
-		TaskDefBase taskDefBase = this.taskDefBaseService.findByCodeAndProIdOne("code=? and processDefinitionId=?",
-				new Object[] { taskDefinitionKey, processDefinitionId });
-
+		TaskDefBase taskDefBase = taskDefBaseService.findByCodeAndProIdOne("code=? and processDefinitionId=?",
+				taskDefinitionKey, processDefinitionId);
 		if (taskDefBase == null) {
 			logger.info("cannot find taskDefBase {} {}", taskDefinitionKey, processDefinitionId);
 			return;
 		}
-		TaskDefNotification taskDefNotification = this.taskDefNotificationService.findByBaseCodeAndBaseProcessIdOne(
-				"taskDefBase=? and eventName=? and templateCode=?",
-				new Object[] { taskDefBase, taskNotification.getEventName(), taskNotification.getTemplateCode() });
+		TaskDefNotification taskDefNotification = taskDefNotificationService.findByBaseCodeAndBaseProcessIdOne(
+				"taskDefBase=? and eventName=? and templateCode=?", taskDefBase, taskNotification.getEventName(),
+				taskNotification.getTemplateCode());
 		if (taskDefNotification == null) {
 			taskDefNotification = new TaskDefNotification();
-			taskDefNotification.setId(this.idGenerator.generateId());
+			taskDefNotification.setId(idGenerator.generateId());
 			taskDefNotification.setTaskDefBase(taskDefBase);
 			taskDefNotification.setEventName(taskNotification.getEventName());
 			taskDefNotification.setTemplateCode(taskNotification.getTemplateCode());
@@ -411,41 +434,42 @@ public class TaskDefinitionServiceImpl implements TaskDefinitionService {
 		}
 		taskDefNotification.setReceiver(taskNotification.getReceiver());
 		taskDefNotification.setType(taskNotification.getType());
-		this.taskDefNotificationService.save(taskDefNotification);
+		taskDefNotificationService.save(taskDefNotification);
+
 	}
 
+	/**
+	 * 删除提醒.
+	 */
 	public void removeTaskNotification(String taskDefinitionKey, String processDefinitionId,
 			TaskNotificationDTO taskNotification) {
-		TaskDefBase taskDefBase = this.taskDefBaseService.findByCodeAndProIdOne("code=? and processDefinitionId=?",
-				new Object[] { taskDefinitionKey, processDefinitionId });
-
+		TaskDefBase taskDefBase = taskDefBaseService.findByCodeAndProIdOne("code=? and processDefinitionId=?",
+				taskDefinitionKey, processDefinitionId);
 		if (taskDefBase == null) {
 			logger.info("cannot find taskDefBase {} {}", taskDefinitionKey, processDefinitionId);
 			return;
 		}
-		TaskDefNotification taskDefNotification = this.taskDefNotificationService.findByBaseCodeAndBaseProcessIdOne(
-				"taskDefBase=? and eventName=? and templateCode=?",
-				new Object[] { taskDefBase, taskNotification.getEventName(), taskNotification.getTemplateCode() });
+		TaskDefNotification taskDefNotification = taskDefNotificationService.findByBaseCodeAndBaseProcessIdOne(
+				"taskDefBase=? and eventName=? and templateCode=?", taskDefBase, taskNotification.getEventName(),
+				taskNotification.getTemplateCode());
 		if (taskDefNotification == null) {
 			return;
 		}
-		this.taskDefNotificationService.remove(taskDefNotification);
+		taskDefNotificationService.remove(taskDefNotification);
 	}
 
 	public void addDeadline(String taskDefinitionKey, String processDefinitionId, DeadlineDTO deadline) {
-		TaskDefBase taskDefBase = this.taskDefBaseService.findByCodeAndProIdOne("code=? and processDefinitionId=?",
-				new Object[] { taskDefinitionKey, processDefinitionId });
-
+		TaskDefBase taskDefBase = taskDefBaseService.findByCodeAndProIdOne("code=? and processDefinitionId=?",
+				taskDefinitionKey, processDefinitionId);
 		if (taskDefBase == null) {
 			logger.info("cannot find taskDefBase {} {}", taskDefinitionKey, processDefinitionId);
 			return;
 		}
-		TaskDefDeadline taskDefDeadline = this.taskDefDeadlineService.findByBaseCodeAndBaseProcessIdOne(
-				" taskDefBase=? and type=? and duration=?",
-				new Object[] { taskDefBase, deadline.getType(), deadline.getDuration() });
+		TaskDefDeadline taskDefDeadline = taskDefDeadlineService.findByBaseCodeAndBaseProcessIdOne(
+				" taskDefBase=? and type=? and duration=?", taskDefBase, deadline.getType(), deadline.getDuration());
 		if (taskDefDeadline == null) {
 			taskDefDeadline = new TaskDefDeadline();
-			taskDefDeadline.setId(this.idGenerator.generateId());
+			taskDefDeadline.setId(idGenerator.generateId());
 			taskDefDeadline.setTaskDefBase(taskDefBase);
 			taskDefDeadline.setType(deadline.getType());
 			taskDefDeadline.setDuration(deadline.getDuration());
@@ -453,23 +477,26 @@ public class TaskDefinitionServiceImpl implements TaskDefinitionService {
 		taskDefDeadline.setNotificationType(deadline.getNotificationType());
 		taskDefDeadline.setNotificationReceiver(deadline.getNotificationReceiver());
 		taskDefDeadline.setNotificationTemplateCode(deadline.getNotificationTemplateCode());
-		this.taskDefDeadlineService.save(taskDefDeadline);
+		taskDefDeadlineService.save(taskDefDeadline);
+
 	}
 
+	/**
+	 * 添加截止日期.
+	 */
 	public void removeDeadline(String taskDefinitionKey, String processDefinitionId, DeadlineDTO deadline) {
-		TaskDefBase taskDefBase = this.taskDefBaseService.findByCodeAndProIdOne("code=? and processDefinitionId=?",
-				new Object[] { taskDefinitionKey, processDefinitionId });
-
+		TaskDefBase taskDefBase = taskDefBaseService.findByCodeAndProIdOne("code=? and processDefinitionId=?",
+				taskDefinitionKey, processDefinitionId);
 		if (taskDefBase == null) {
 			logger.info("cannot find taskDefBase {} {}", taskDefinitionKey, processDefinitionId);
 			return;
 		}
-		TaskDefDeadline taskDefDeadline = this.taskDefDeadlineService.findByBaseCodeAndBaseProcessIdOne(
-				" taskDefBase=? and type=? and duration=?",
-				new Object[] { taskDefBase, deadline.getType(), deadline.getDuration() });
+		TaskDefDeadline taskDefDeadline = taskDefDeadlineService.findByBaseCodeAndBaseProcessIdOne(
+				" taskDefBase=? and type=? and duration=?", taskDefBase, deadline.getType(), deadline.getDuration());
 		if (taskDefDeadline == null) {
 			return;
 		}
-		this.taskDefDeadlineService.remove(taskDefDeadline);
+		taskDefDeadlineService.remove(taskDefDeadline);
 	}
+
 }

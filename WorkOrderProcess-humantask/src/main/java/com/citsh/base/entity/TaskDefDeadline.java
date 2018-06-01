@@ -1,8 +1,8 @@
 package com.citsh.base.entity;
 
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,178 +12,263 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+* TaskDefDeadline 任务定义截止时间.
+*/
 @Entity
-@Table(name="TASK_DEF_DEADLINE")
-public class TaskDefDeadline
-  implements Serializable
-{
-  private static final long serialVersionUID = 0L;
-  private Long id;
-  private TaskDefBase taskDefBase;
-  private String type;
-  private String duration;
-  private String status;
-  private String escalationType;
-  private String notificationCondition;
-  private String notificationType;
-  private String notificationReceiver;
-  private String notificationTemplateCode;
-  private String reassginment;
-  private String operation;
-  private Set<TaskDefEscalation> taskDefEscalations = new HashSet(0);
+@Table(name = "TASK_DEF_DEADLINE")
+public class TaskDefDeadline implements java.io.Serializable {
+ private static final long serialVersionUID = 0L;
 
-  public TaskDefDeadline()
-  {
-  }
+ /** 主键. */
+ private Long id;
 
-  public TaskDefDeadline(Long id) {
-    this.id = id;
-  }
+ /** 外键，任务定义. */
+ private TaskDefBase taskDefBase;
 
-  public TaskDefDeadline(Long id, TaskDefBase taskDefBase, String type, String duration, String status, String escalationType, String notificationCondition, String notificationType, String notificationReceiver, String notificationTemplateCode, String reassginment, String operation, Set<TaskDefEscalation> taskDefEscalations)
-  {
-    this.id = id;
-    this.taskDefBase = taskDefBase;
-    this.type = type;
-    this.duration = duration;
-    this.status = status;
-    this.escalationType = escalationType;
-    this.notificationCondition = notificationCondition;
-    this.notificationType = notificationType;
-    this.notificationReceiver = notificationReceiver;
-    this.notificationTemplateCode = notificationTemplateCode;
-    this.reassginment = reassginment;
-    this.operation = operation;
-    this.taskDefEscalations = taskDefEscalations;
-  }
-  @Id
-  @Column(name="ID", unique=true, nullable=false)
-  public Long getId() {
-    return this.id;
-  }
+ /** 分类. */
+ private String type;
 
-  public void setId(Long id)
-  {
-    this.id = id;
-  }
-  @ManyToOne(fetch=FetchType.LAZY)
-  @JoinColumn(name="BASE_ID")
-  public TaskDefBase getTaskDefBase() {
-    return this.taskDefBase;
-  }
+ /** 持续时间. */
+ private String duration;
 
-  public void setTaskDefBase(TaskDefBase taskDefBase)
-  {
-    this.taskDefBase = taskDefBase;
-  }
+ /** 状态. */
+ private String status;
 
-  @Column(name="TYPE", length=50)
-  public String getType() {
-    return this.type;
-  }
+ /** 升级类型. */
+ private String escalationType;
 
-  public void setType(String type)
-  {
-    this.type = type;
-  }
+ /** 提醒条件. */
+ private String notificationCondition;
 
-  @Column(name="DURATION", length=100)
-  public String getDuration() {
-    return this.duration;
-  }
+ /** 提醒类型. */
+ private String notificationType;
 
-  public void setDuration(String duration)
-  {
-    this.duration = duration;
-  }
+ /** 提醒接收人. */
+ private String notificationReceiver;
 
-  @Column(name="STATUS", length=50)
-  public String getStatus() {
-    return this.status;
-  }
+ /** 提醒模板编号. */
+ private String notificationTemplateCode;
 
-  public void setStatus(String status)
-  {
-    this.status = status;
-  }
+ /** 重分配. */
+ private String reassginment;
 
-  @Column(name="ESCALATION_TYPE", length=50)
-  public String getEscalationType() {
-    return this.escalationType;
-  }
+ /** 操作. */
+ private String operation;
 
-  public void setEscalationType(String escalationType)
-  {
-    this.escalationType = escalationType;
-  }
+ /** . */
+ private Set<TaskDefEscalation> taskDefEscalations = new HashSet<TaskDefEscalation>(
+         0);
 
-  @Column(name="NOTIFICATION_CONDITION", length=200)
-  public String getNotificationCondition() {
-    return this.notificationCondition;
-  }
+ public TaskDefDeadline() {
+ }
 
-  public void setNotificationCondition(String notificationCondition)
-  {
-    this.notificationCondition = notificationCondition;
-  }
+ public TaskDefDeadline(Long id) {
+     this.id = id;
+ }
 
-  @Column(name="NOTIFICATION_TYPE", length=200)
-  public String getNotificationType() {
-    return this.notificationType;
-  }
+ public TaskDefDeadline(Long id, TaskDefBase taskDefBase, String type,
+         String duration, String status, String escalationType,
+         String notificationCondition, String notificationType,
+         String notificationReceiver, String notificationTemplateCode,
+         String reassginment, String operation,
+         Set<TaskDefEscalation> taskDefEscalations) {
+     this.id = id;
+     this.taskDefBase = taskDefBase;
+     this.type = type;
+     this.duration = duration;
+     this.status = status;
+     this.escalationType = escalationType;
+     this.notificationCondition = notificationCondition;
+     this.notificationType = notificationType;
+     this.notificationReceiver = notificationReceiver;
+     this.notificationTemplateCode = notificationTemplateCode;
+     this.reassginment = reassginment;
+     this.operation = operation;
+     this.taskDefEscalations = taskDefEscalations;
+ }
 
-  public void setNotificationType(String notificationType)
-  {
-    this.notificationType = notificationType;
-  }
+ /** @return 主键. */
+ @Id
+ @Column(name = "ID", unique = true, nullable = false)
+ public Long getId() {
+     return this.id;
+ }
 
-  @Column(name="NOTIFICATION_RECEIVER", length=200)
-  public String getNotificationReceiver() {
-    return this.notificationReceiver;
-  }
+ /**
+  * @param id
+  *            主键.
+  */
+ public void setId(Long id) {
+     this.id = id;
+ }
 
-  public void setNotificationReceiver(String notificationReceiver)
-  {
-    this.notificationReceiver = notificationReceiver;
-  }
+ /** @return 外键，任务定义. */
+ @ManyToOne(fetch = FetchType.LAZY)
+ @JoinColumn(name = "BASE_ID")
+ public TaskDefBase getTaskDefBase() {
+     return this.taskDefBase;
+ }
 
-  @Column(name="NOTIFICATION_TEMPLATE_CODE", length=200)
-  public String getNotificationTemplateCode() {
-    return this.notificationTemplateCode;
-  }
+ /**
+  * @param taskDefBase
+  *            外键，任务定义.
+  */
+ public void setTaskDefBase(TaskDefBase taskDefBase) {
+     this.taskDefBase = taskDefBase;
+ }
 
-  public void setNotificationTemplateCode(String notificationTemplateCode)
-  {
-    this.notificationTemplateCode = notificationTemplateCode;
-  }
+ /** @return 分类. */
+ @Column(name = "TYPE", length = 50)
+ public String getType() {
+     return this.type;
+ }
 
-  @Column(name="REASSGINMENT", length=200)
-  public String getReassginment() {
-    return this.reassginment;
-  }
+ /**
+  * @param type
+  *            分类.
+  */
+ public void setType(String type) {
+     this.type = type;
+ }
 
-  public void setReassginment(String reassginment)
-  {
-    this.reassginment = reassginment;
-  }
+ /** @return 持续时间. */
+ @Column(name = "DURATION", length = 100)
+ public String getDuration() {
+     return this.duration;
+ }
 
-  @Column(name="OPERATION", length=200)
-  public String getOperation() {
-    return this.operation;
-  }
+ /**
+  * @param duration
+  *            持续时间.
+  */
+ public void setDuration(String duration) {
+     this.duration = duration;
+ }
 
-  public void setOperation(String operation)
-  {
-    this.operation = operation;
-  }
+ /** @return 状态. */
+ @Column(name = "STATUS", length = 50)
+ public String getStatus() {
+     return this.status;
+ }
 
-  @OneToMany(fetch=FetchType.LAZY, mappedBy="taskDefDeadline")
-  public Set<TaskDefEscalation> getTaskDefEscalations() {
-    return this.taskDefEscalations;
-  }
+ /**
+  * @param status
+  *            状态.
+  */
+ public void setStatus(String status) {
+     this.status = status;
+ }
 
-  public void setTaskDefEscalations(Set<TaskDefEscalation> taskDefEscalations)
-  {
-    this.taskDefEscalations = taskDefEscalations;
-  }
+ /** @return 升级类型. */
+ @Column(name = "ESCALATION_TYPE", length = 50)
+ public String getEscalationType() {
+     return this.escalationType;
+ }
+
+ /**
+  * @param escalationType
+  *            升级类型.
+  */
+ public void setEscalationType(String escalationType) {
+     this.escalationType = escalationType;
+ }
+
+ /** @return 提醒条件. */
+ @Column(name = "NOTIFICATION_CONDITION", length = 200)
+ public String getNotificationCondition() {
+     return this.notificationCondition;
+ }
+
+ /**
+  * @param notificationCondition
+  *            提醒条件.
+  */
+ public void setNotificationCondition(String notificationCondition) {
+     this.notificationCondition = notificationCondition;
+ }
+
+ /** @return 提醒类型. */
+ @Column(name = "NOTIFICATION_TYPE", length = 200)
+ public String getNotificationType() {
+     return this.notificationType;
+ }
+
+ /**
+  * @param notificationType
+  *            提醒类型.
+  */
+ public void setNotificationType(String notificationType) {
+     this.notificationType = notificationType;
+ }
+
+ /** @return 提醒接收人. */
+ @Column(name = "NOTIFICATION_RECEIVER", length = 200)
+ public String getNotificationReceiver() {
+     return this.notificationReceiver;
+ }
+
+ /**
+  * @param notificationReceiver
+  *            提醒接收人.
+  */
+ public void setNotificationReceiver(String notificationReceiver) {
+     this.notificationReceiver = notificationReceiver;
+ }
+
+ /** @return 提醒模板编号. */
+ @Column(name = "NOTIFICATION_TEMPLATE_CODE", length = 200)
+ public String getNotificationTemplateCode() {
+     return this.notificationTemplateCode;
+ }
+
+ /**
+  * @param notificationTemplateCode
+  *            提醒模板编号.
+  */
+ public void setNotificationTemplateCode(String notificationTemplateCode) {
+     this.notificationTemplateCode = notificationTemplateCode;
+ }
+
+ /** @return 重分配. */
+ @Column(name = "REASSGINMENT", length = 200)
+ public String getReassginment() {
+     return this.reassginment;
+ }
+
+ /**
+  * @param reassginment
+  *            重分配.
+  */
+ public void setReassginment(String reassginment) {
+     this.reassginment = reassginment;
+ }
+
+ /** @return 操作. */
+ @Column(name = "OPERATION", length = 200)
+ public String getOperation() {
+     return this.operation;
+ }
+
+ /**
+  * @param operation
+  *            操作.
+  */
+ public void setOperation(String operation) {
+     this.operation = operation;
+ }
+
+ /** @return . */
+ @OneToMany(fetch = FetchType.LAZY, mappedBy = "taskDefDeadline")
+ public Set<TaskDefEscalation> getTaskDefEscalations() {
+     return this.taskDefEscalations;
+ }
+
+ /**
+  * @param taskDefEscalations
+  *            .
+  */
+ public void setTaskDefEscalations(Set<TaskDefEscalation> taskDefEscalations) {
+     this.taskDefEscalations = taskDefEscalations;
+ }
 }

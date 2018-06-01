@@ -12,19 +12,15 @@ import org.activiti.engine.impl.pvm.process.ProcessDefinitionImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ListActivityCmd
-  implements Command<Map<String, String>>
-{
-  private static Logger logger = LoggerFactory.getLogger(ListActivityCmd.class)
-    ;
-  private String executionId;
+public class ListActivityCmd implements Command<Map<String, String>> {
+	private static Logger logger = LoggerFactory.getLogger(ListActivityCmd.class);
+	private String executionId;
 
-  public ListActivityCmd(String executionId)
-  {
-    this.executionId = executionId;
-  }
+	public ListActivityCmd(String executionId) {
+		this.executionId = executionId;
+	}
 
-  public Map<String, String> execute(CommandContext commandContext)
+	public Map<String, String> execute(CommandContext commandContext)
   {
     ExecutionEntity executionEntity = Context.getCommandContext()
       .getExecutionEntityManager().findExecutionById(this.executionId);

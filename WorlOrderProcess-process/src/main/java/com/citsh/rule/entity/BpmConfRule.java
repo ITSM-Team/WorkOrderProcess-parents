@@ -1,7 +1,5 @@
 package com.citsh.rule.entity;
 
-import com.citsh.config.entity.BpmConfNode;
-import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,58 +8,80 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.citsh.config.entity.BpmConfNode;
+
+/**
+ * BpmConfRule 配置规则（暂时未用）.
+ */
 @Entity
-@Table(name="BPM_CONF_RULE")
-public class BpmConfRule
-  implements Serializable
-{
-  private static final long serialVersionUID = 0L;
-  private Long id;
-  private BpmConfNode bpmConfNode;
-  private String value;
+@Table(name = "BPM_CONF_RULE")
+public class BpmConfRule implements java.io.Serializable {
+    private static final long serialVersionUID = 0L;
 
-  public BpmConfRule()
-  {
-  }
+    /** 主键. */
+    private Long id;
 
-  public BpmConfRule(Long id)
-  {
-    this.id = id;
-  }
+    /** 外键，配置节点. */
+    private BpmConfNode bpmConfNode;
 
-  public BpmConfRule(Long id, BpmConfNode bpmConfNode, String value) {
-    this.id = id;
-    this.bpmConfNode = bpmConfNode;
-    this.value = value;
-  }
-  @Id
-  @Column(name="ID", unique=true, nullable=false)
-  public Long getId() {
-    return this.id;
-  }
+    /** 值. */
+    private String value;
 
-  public void setId(Long id)
-  {
-    this.id = id;
-  }
-  @ManyToOne(fetch=FetchType.LAZY)
-  @JoinColumn(name="NODE_ID")
-  public BpmConfNode getBpmConfNode() {
-    return this.bpmConfNode;
-  }
+    public BpmConfRule() {
+    }
 
-  public void setBpmConfNode(BpmConfNode bpmConfNode)
-  {
-    this.bpmConfNode = bpmConfNode;
-  }
+    public BpmConfRule(Long id) {
+        this.id = id;
+    }
 
-  @Column(name="VALUE", length=200)
-  public String getValue() {
-    return this.value;
-  }
+    public BpmConfRule(Long id, BpmConfNode bpmConfNode, String value) {
+        this.id = id;
+        this.bpmConfNode = bpmConfNode;
+        this.value = value;
+    }
 
-  public void setValue(String value)
-  {
-    this.value = value;
-  }
+    /** @return 主键. */
+    @Id
+    @Column(name = "ID", unique = true, nullable = false)
+    public Long getId() {
+        return this.id;
+    }
+
+    /**
+     * @param id
+     *            主键.
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /** @return 外键，配置节点. */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "NODE_ID")
+    public BpmConfNode getBpmConfNode() {
+        return this.bpmConfNode;
+    }
+
+    /**
+     * @param bpmConfNode
+     *            外键，配置节点.
+     */
+    public void setBpmConfNode(BpmConfNode bpmConfNode) {
+        this.bpmConfNode = bpmConfNode;
+    }
+
+    /** @return 值. */
+    @Column(name = "VALUE", length = 200)
+    public String getValue() {
+        return this.value;
+    }
+
+    /**
+     * @param value
+     *            值.
+     */
+    public void setValue(String value) {
+        this.value = value;
+    }
+
 }

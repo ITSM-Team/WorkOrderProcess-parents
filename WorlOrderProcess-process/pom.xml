@@ -23,11 +23,6 @@
 			<version>${project.version}</version>
 		</dependency>
 
-		<dependency>
-			<groupId>com.citsh</groupId>
-			<artifactId>WorkOrderProcess-base</artifactId>
-			<version>${project.version}</version>
-		</dependency>
 
 		<dependency>
 			<groupId>com.citsh</groupId>

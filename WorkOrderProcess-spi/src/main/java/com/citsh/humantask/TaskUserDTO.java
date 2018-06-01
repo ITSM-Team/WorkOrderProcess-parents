@@ -1,5 +1,4 @@
 package com.citsh.humantask;
-
 public class TaskUserDTO
 {
   private String catalog;

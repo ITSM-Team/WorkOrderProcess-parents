@@ -10,9 +10,6 @@
         http://www.springframework.org/schema/data/repository http://www.springframework.org/schema/data/repository/spring-repository.xsd 
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd ">
 
-
-
-
 	<!-- 实体管理器 -->
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">

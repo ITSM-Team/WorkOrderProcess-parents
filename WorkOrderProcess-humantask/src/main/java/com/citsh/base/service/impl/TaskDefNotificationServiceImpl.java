@@ -1,5 +1,4 @@
 package com.citsh.base.service.impl;
-
 import com.citsh.base.dao.TaskDefNotificationDao;
 import com.citsh.base.entity.TaskDefNotification;
 import com.citsh.base.service.TaskDefNotificationService;
@@ -15,12 +14,12 @@ public class TaskDefNotificationServiceImpl implements TaskDefNotificationServic
 	@Autowired
 	private TaskDefNotificationDao defNotificationDao;
 
-	public List<TaskDefNotification> findByBaseCodeAndBaseProcessId(String condition, Object[] args) {
+	public List<TaskDefNotification> findByBaseCodeAndBaseProcessId(String condition, Object... args) {
 		List<TaskDefNotification> list = this.defNotificationDao.listBySQL(condition, args);
 		return list;
 	}
 
-	public TaskDefNotification findByBaseCodeAndBaseProcessIdOne(String condition, Object[] args) {
+	public TaskDefNotification findByBaseCodeAndBaseProcessIdOne(String condition, Object... args) {
 		List<TaskDefNotification> list = this.defNotificationDao.listBySQL(condition, args);
 		if (list.size() > 0) {
 			return (TaskDefNotification) list.get(0);

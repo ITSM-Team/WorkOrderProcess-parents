@@ -1,6 +1,5 @@
 package com.citsh.base.entity;
 
-import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,95 +8,133 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+* TaskDefUser 任务定义用户.
+*/
 @Entity
-@Table(name="TASK_DEF_USER")
-public class TaskDefUser
-  implements Serializable
-{
-  private static final long serialVersionUID = 0L;
-  private Long id;
-  private TaskDefBase taskDefBase;
-  private String value;
-  private String type;
-  private String catalog;
-  private String status;
+@Table(name = "TASK_DEF_USER")
+public class TaskDefUser implements java.io.Serializable {
+ private static final long serialVersionUID = 0L;
 
-  public TaskDefUser()
-  {
-  }
+ /** 主键. */
+ private Long id;
 
-  public TaskDefUser(Long id)
-  {
-    this.id = id;
-  }
+ /** 外键，任务定义. */
+ private TaskDefBase taskDefBase;
 
-  public TaskDefUser(Long id, TaskDefBase taskDefBase, String value, String type, String catalog, String status)
-  {
-    this.id = id;
-    this.taskDefBase = taskDefBase;
-    this.value = value;
-    this.type = type;
-    this.catalog = catalog;
-    this.status = status;
-  }
-  @Id
-  @Column(name="ID", unique=true, nullable=false)
-  public Long getId() {
-    return this.id;
-  }
+ /** 值. */
+ private String value;
 
-  public void setId(Long id)
-  {
-    this.id = id;
-  }
-  @ManyToOne(fetch=FetchType.LAZY)
-  @JoinColumn(name="BASE_ID")
-  public TaskDefBase getTaskDefBase() {
-    return this.taskDefBase;
-  }
+ /** 类型. */
+ private String type;
 
-  public void setTaskDefBase(TaskDefBase taskDefBase)
-  {
-    this.taskDefBase = taskDefBase;
-  }
+ /** 分类. */
+ private String catalog;
 
-  @Column(name="VALUE", length=200)
-  public String getValue() {
-    return this.value;
-  }
+ /** 状态. */
+ private String status;
 
-  public void setValue(String value)
-  {
-    this.value = value;
-  }
+ public TaskDefUser() {
+ }
 
-  @Column(name="TYPE", length=50)
-  public String getType() {
-    return this.type;
-  }
+ public TaskDefUser(Long id) {
+     this.id = id;
+ }
 
-  public void setType(String type)
-  {
-    this.type = type;
-  }
+ public TaskDefUser(Long id, TaskDefBase taskDefBase, String value,
+         String type, String catalog, String status) {
+     this.id = id;
+     this.taskDefBase = taskDefBase;
+     this.value = value;
+     this.type = type;
+     this.catalog = catalog;
+     this.status = status;
+ }
 
-  @Column(name="CATALOG", length=200)
-  public String getCatalog() {
-    return this.catalog;
-  }
+ /** @return 主键. */
+ @Id
+ @Column(name = "ID", unique = true, nullable = false)
+ public Long getId() {
+     return this.id;
+ }
 
-  public void setCatalog(String catalog)
-  {
-    this.catalog = catalog;
-  }
+ /**
+  * @param id
+  *            主键.
+  */
+ public void setId(Long id) {
+     this.id = id;
+ }
 
-  @Column(name="STATUS", length=50)
-  public String getStatus() {
-    return this.status;
-  }
+ /** @return 外键，任务定义. */
+ @ManyToOne(fetch = FetchType.LAZY)
+ @JoinColumn(name = "BASE_ID")
+ public TaskDefBase getTaskDefBase() {
+     return this.taskDefBase;
+ }
 
-  public void setStatus(String status)
-  {
-    this.status = status;
-  }
+ /**
+  * @param taskDefBase
+  *            外键，任务定义.
+  */
+ public void setTaskDefBase(TaskDefBase taskDefBase) {
+     this.taskDefBase = taskDefBase;
+ }
+
+ /** @return 值. */
+ @Column(name = "VALUE", length = 200)
+ public String getValue() {
+     return this.value;
+ }
+
+ /**
+  * @param value
+  *            值.
+  */
+ public void setValue(String value) {
+     this.value = value;
+ }
+
+ /** @return 类型. */
+ @Column(name = "TYPE", length = 50)
+ public String getType() {
+     return this.type;
+ }
+
+ /**
+  * @param type
+  *            类型.
+  */
+ public void setType(String type) {
+     this.type = type;
+ }
+
+ /** @return 分类. */
+ @Column(name = "CATALOG", length = 200)
+ public String getCatalog() {
+     return this.catalog;
+ }
+
+ /**
+  * @param catalog
+  *            分类.
+  */
+ public void setCatalog(String catalog) {
+     this.catalog = catalog;
+ }
+
+ /** @return 状态. */
+ @Column(name = "STATUS", length = 50)
+ public String getStatus() {
+     return this.status;
+ }
+
+ /**
+  * @param status
+  *            状态.
+  */
+ public void setStatus(String status) {
+     this.status = status;
+ }
 }
+

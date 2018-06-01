@@ -1,7 +1,6 @@
 package com.citsh.notice.entity;
 
-import com.citsh.config.entity.BpmConfNode;
-import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,119 +9,172 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.citsh.config.entity.BpmConfNode;
+
+/**
+ * BpmConfNotice 配置提醒.
+ */
 @Entity
-@Table(name="BPM_CONF_NOTICE")
-public class BpmConfNotice
-  implements Serializable
-{
-  private static final long serialVersionUID = 0L;
-  private Long id;
-  private BpmMailTemplate bpmMailTemplate;
-  private BpmConfNode bpmConfNode;
-  private Integer type;
-  private String receiver;
-  private String dueDate;
-  private String templateCode;
-  private String notificationType;
+@Table(name = "BPM_CONF_NOTICE")
+public class BpmConfNotice implements java.io.Serializable {
+    private static final long serialVersionUID = 0L;
 
-  public BpmConfNotice()
-  {
-  }
+    /** 主键. */
+    private Long id;
 
-  public BpmConfNotice(Long id)
-  {
-    this.id = id;
-  }
+    /** 外键，模板. */
+    private BpmMailTemplate bpmMailTemplate;
 
-  public BpmConfNotice(Long id, BpmMailTemplate bpmMailTemplate, BpmConfNode bpmConfNode, Integer type, String receiver, String dueDate, String templateCode, String notificationType)
-  {
-    this.id = id;
-    this.bpmMailTemplate = bpmMailTemplate;
-    this.bpmConfNode = bpmConfNode;
-    this.type = type;
-    this.receiver = receiver;
-    this.dueDate = dueDate;
-    this.templateCode = templateCode;
-    this.notificationType = notificationType;
-  }
-  @Id
-  @Column(name="ID", unique=true, nullable=false)
-  public Long getId() {
-    return this.id;
-  }
+    /** 外键，配置节点. */
+    private BpmConfNode bpmConfNode;
 
-  public void setId(Long id)
-  {
-    this.id = id;
-  }
-  @ManyToOne(fetch=FetchType.LAZY)
-  @JoinColumn(name="TEMPLATE_ID")
-  public BpmMailTemplate getBpmMailTemplate() {
-    return this.bpmMailTemplate;
-  }
+    /** 分类. */
+    private Integer type;
 
-  public void setBpmMailTemplate(BpmMailTemplate bpmMailTemplate)
-  {
-    this.bpmMailTemplate = bpmMailTemplate;
-  }
-  @ManyToOne(fetch=FetchType.LAZY)
-  @JoinColumn(name="NODE_ID")
-  public BpmConfNode getBpmConfNode() {
-    return this.bpmConfNode;
-  }
+    /** 接收人. */
+    private String receiver;
 
-  public void setBpmConfNode(BpmConfNode bpmConfNode)
-  {
-    this.bpmConfNode = bpmConfNode;
-  }
+    /** 持续时间. */
+    private String dueDate;
 
-  @Column(name="TYPE")
-  public Integer getType() {
-    return this.type;
-  }
+    /** 模板编码. */
+    private String templateCode;
 
-  public void setType(Integer type)
-  {
-    this.type = type;
-  }
+    /** 提醒类型. */
+    private String notificationType;
 
-  @Column(name="RECEIVER", length=200)
-  public String getReceiver() {
-    return this.receiver;
-  }
+    public BpmConfNotice() {
+    }
 
-  public void setReceiver(String receiver)
-  {
-    this.receiver = receiver;
-  }
+    public BpmConfNotice(Long id) {
+        this.id = id;
+    }
 
-  @Column(name="DUE_DATE", length=50)
-  public String getDueDate() {
-    return this.dueDate;
-  }
+    public BpmConfNotice(Long id, BpmMailTemplate bpmMailTemplate,
+            BpmConfNode bpmConfNode, Integer type, String receiver,
+            String dueDate, String templateCode, String notificationType) {
+        this.id = id;
+        this.bpmMailTemplate = bpmMailTemplate;
+        this.bpmConfNode = bpmConfNode;
+        this.type = type;
+        this.receiver = receiver;
+        this.dueDate = dueDate;
+        this.templateCode = templateCode;
+        this.notificationType = notificationType;
+    }
 
-  public void setDueDate(String dueDate)
-  {
-    this.dueDate = dueDate;
-  }
+    /** @return 主键. */
+    @Id
+    @Column(name = "ID", unique = true, nullable = false)
+    public Long getId() {
+        return this.id;
+    }
 
-  @Column(name="TEMPLATE_CODE", length=200)
-  public String getTemplateCode() {
-    return this.templateCode;
-  }
+    /**
+     * @param id
+     *            主键.
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-  public void setTemplateCode(String templateCode)
-  {
-    this.templateCode = templateCode;
-  }
+    /** @return 外键，模板. */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "TEMPLATE_ID")
+    public BpmMailTemplate getBpmMailTemplate() {
+        return this.bpmMailTemplate;
+    }
 
-  @Column(name="NOTIFICATION_TYPE", length=200)
-  public String getNotificationType() {
-    return this.notificationType;
-  }
+    /**
+     * @param bpmMailTemplate
+     *            外键，模板.
+     */
+    public void setBpmMailTemplate(BpmMailTemplate bpmMailTemplate) {
+        this.bpmMailTemplate = bpmMailTemplate;
+    }
 
-  public void setNotificationType(String notificationType)
-  {
-    this.notificationType = notificationType;
-  }
+    /** @return 外键，配置节点. */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "NODE_ID")
+    public BpmConfNode getBpmConfNode() {
+        return this.bpmConfNode;
+    }
+
+    /**
+     * @param bpmConfNode
+     *            外键，配置节点.
+     */
+    public void setBpmConfNode(BpmConfNode bpmConfNode) {
+        this.bpmConfNode = bpmConfNode;
+    }
+
+    /** @return 分类. */
+    @Column(name = "TYPE")
+    public Integer getType() {
+        return this.type;
+    }
+
+    /**
+     * @param type
+     *            分类.
+     */
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    /** @return 接收人. */
+    @Column(name = "RECEIVER", length = 200)
+    public String getReceiver() {
+        return this.receiver;
+    }
+
+    /**
+     * @param receiver
+     *            接收人.
+     */
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
+    }
+
+    /** @return 持续时间. */
+    @Column(name = "DUE_DATE", length = 50)
+    public String getDueDate() {
+        return this.dueDate;
+    }
+
+    /**
+     * @param dueDate
+     *            持续时间.
+     */
+    public void setDueDate(String dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    /** @return 模板编码. */
+    @Column(name = "TEMPLATE_CODE", length = 200)
+    public String getTemplateCode() {
+        return this.templateCode;
+    }
+
+    /**
+     * @param templateCode
+     *            模板编码.
+     */
+    public void setTemplateCode(String templateCode) {
+        this.templateCode = templateCode;
+    }
+
+    /** @return 提醒类型. */
+    @Column(name = "NOTIFICATION_TYPE", length = 200)
+    public String getNotificationType() {
+        return this.notificationType;
+    }
+
+    /**
+     * @param notificationType
+     *            提醒类型.
+     */
+    public void setNotificationType(String notificationType) {
+        this.notificationType = notificationType;
+    }
 }

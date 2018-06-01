@@ -1,6 +1,9 @@
 package com.citsh.util;
 
 import java.lang.reflect.Field;
+
+import javax.persistence.Query;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.mongodb.core.query.Update;

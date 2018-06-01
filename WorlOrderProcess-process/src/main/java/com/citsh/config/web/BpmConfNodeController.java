@@ -1,8 +1,10 @@
 package com.citsh.config.web;
-
 import com.citsh.config.entity.BpmConfBase;
+import com.citsh.config.entity.BpmConfNode;
 import com.citsh.config.service.BpmConfBaseService;
 import com.citsh.config.service.BpmConfNodeService;
+import com.google.j2objc.annotations.ReflectionSupport;
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +27,7 @@ public class BpmConfNodeController
   public String list(@RequestParam("bpmConfBaseId") Long bpmConfBaseId, Model model)
   {
     BpmConfBase bpmConfBase = this.bpmConfBaseService.find(bpmConfBaseId);
-    List bpmConfNodes = this.bpmConfNodeService.findByBpmConfBase(bpmConfBase);
+    List<BpmConfNode> bpmConfNodes = this.bpmConfNodeService.findByBpmConfBase(bpmConfBase.getId());
     model.addAttribute("bpmConfBase", bpmConfBase);
     model.addAttribute("bpmConfNodes", bpmConfNodes);
     return "bpm/bpm-conf-node-list";

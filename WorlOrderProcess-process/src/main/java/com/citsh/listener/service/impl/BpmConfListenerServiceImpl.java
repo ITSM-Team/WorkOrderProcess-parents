@@ -8,23 +8,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class BpmConfListenerServiceImpl
-  implements BpmConfListenerService
-{
+public class BpmConfListenerServiceImpl implements BpmConfListenerService {
 
-  @Autowired
-  private BpmConfListenerDao bpmConfListenerDao;
+	@Autowired
+	private BpmConfListenerDao bpmConfListenerDao;
 
-  public List<BpmConfListener> listBySQL(String condition, Object[] args)
-  {
-    return this.bpmConfListenerDao.listBySQL(condition, args);
-  }
+	public List<BpmConfListener> listBySQL(String condition, Object... args) {
+		return this.bpmConfListenerDao.listBySQL(condition, args);
+	}
 
-  public void save(BpmConfListener bpmConfListener) {
-    this.bpmConfListenerDao.save(bpmConfListener);
-  }
+	public void save(BpmConfListener bpmConfListener) {
+		this.bpmConfListenerDao.save(bpmConfListener);
+	}
 
-  public void remove(Long id) {
-    this.bpmConfListenerDao.delete(id);
-  }
+	public void remove(Long id) {
+		this.bpmConfListenerDao.delete(id);
+	}
+
+	public BpmConfListener findByHSQLOne(String condition, Object... objects) {
+		List<BpmConfListener> bpmConfListeners = bpmConfListenerDao.listBySQL(condition, objects);
+		if (bpmConfListeners.size() > 0) {
+			return bpmConfListeners.get(0);
+		}
+		return null;
+	}
 }

@@ -33,7 +33,7 @@
 		<bean class="com.mossle.core.logback.JulHandler"/>2017/3/16 -->
 
 	<!-- 无法IoC时，提供一个单例获得当前的ctx -->
-	<!-- <bean id="applicationContextHelper" class="com.mossle.core.spring.ApplicationContextHelper"/> -->
+	<bean id="applicationContextHelper" class="com.citsh.spring.ApplicationContextHelper"/>
 
 	<!-- 简易的csv导出工具 -->
 	<bean id="exportor" class="com.citsh.export.CsvExportor" />
@@ -47,9 +47,11 @@
 	<bean id="tenantHolder" class="com.citsh.tenant.MockTenantHolder" />
 
 	<!-- 模板 -->
-<!-- 	<bean id="templateServiceImpl" class="com.citsh.template.impl.TemplateServiceImpl">
+	<bean id="templateServiceImpl" class="com.citsh.template.impl.TemplateServiceImpl">
 		<property name="baseDir" value="${store.baseDir}/cms/template" />
-	</bean> -->
-
-
+	</bean>
+	
+	<bean id="currentUserHolder" class="com.citsh.auto.MockCurrentUserHolder" />
+	
+	
 </beans>

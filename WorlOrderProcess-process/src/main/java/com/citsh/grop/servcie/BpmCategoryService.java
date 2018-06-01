@@ -1,33 +1,79 @@
 package com.citsh.grop.servcie;
 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.citsh.grop.dao.BpmCategoryDao;
 import com.citsh.grop.entity.BpmCategory;
 import com.citsh.page.Page;
 import com.citsh.query.PropertyFilter;
-import java.util.List;
-import org.springframework.stereotype.Service;
 
 @Service
-public abstract interface BpmCategoryService
-{
-  public abstract BpmCategory add(BpmCategory paramBpmCategory);
+public interface BpmCategoryService {
+	/**
+	 * 保存
+	 */
+	public BpmCategory add(BpmCategory entity);
 
-  public abstract BpmCategory find(Long paramLong);
+	/**
+	 * 查询
+	 */
+	public BpmCategory find(Long id);
 
-  public abstract List<BpmCategory> findAll();
+	/**
+	 * 查询集合
+	 */
+	public List<BpmCategory> findAll();
 
-  public abstract long count();
+	/**
+	 * 查询总数
+	 */
+	public long count();
 
-  public abstract List<BpmCategory> listBySQL(String paramString);
+	/**
+	 * 通过sql查询集合
+	 */
+	public List<BpmCategory> listBySQL(String sql);
 
-  public abstract void deleteById(Object paramObject);
+	/**
+	 * 根据实体id删除
+	 */
+	public void deleteById(Object entityId);
 
-  public abstract void deleteByIds(Object[] paramArrayOfObject);
+	/**
+	 * 根据实体id删除数组
+	 */
+	public void deleteByIds(Object[] entityIds);
 
-  public abstract void update(BpmCategory paramBpmCategory);
+	/**
+	 * 修改
+	 */
+	public void update(BpmCategory entity);
 
-  public abstract boolean updateByCondition(String paramString1, String paramString2, Object[] paramArrayOfObject);
+	/**
+	 * 根据条件修改 variable="xxx=?,xxx=?";//要修改的字段，参数用？ condition=" xxx=? and xxx=?"
+	 * ;//条件 updateByCondition(variable, condition, "参数1","参数2","参数3","参数4")
+	 */
+	public boolean updateByCondition(String variable, String condition, Object... args);
 
-  public abstract Page pagedQuery(Page paramPage, List<PropertyFilter> paramList);
+	/**
+	 * 分页查询函数，根据entityClass和page参数进行查询.
+	 * 
+	 * @param <T>
+	 *            实体类型
+	 * @param entityClass
+	 *            实体类型
+	 * @param page
+	 *            分页里包含的各种参数
+	 * @param criterions
+	 *            条件
+	 * @return 含总记录数和当前页数据的Page对象.
+	 */
+	public Page pagedQuery(Page page, List<PropertyFilter> propertyFilters);
 
-  public abstract void save(BpmCategory paramBpmCategory);
+	/**
+	 * 保存
+	 */
+	public void save(BpmCategory bpmCategory);
 }

@@ -27,3 +27,4 @@ public class BpmConfAssignServiceImpl
     this.bpmConfAssignDao.save(bpmConfAssign);
   }
 }
+

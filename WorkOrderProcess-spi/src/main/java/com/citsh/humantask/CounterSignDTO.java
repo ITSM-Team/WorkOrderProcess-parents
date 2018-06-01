@@ -1,5 +1,4 @@
 package com.citsh.humantask;
-
 public class CounterSignDTO
 {
   private String type;

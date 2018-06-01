@@ -1,4 +1,5 @@
 package com.citsh.tenant;
+
 public interface TenantHolder {
     String getTenantId();
 

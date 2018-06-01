@@ -1,7 +1,11 @@
+
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 public class Test {
+
 	public static class Model {
 		private List<String> list;
 
@@ -14,15 +18,7 @@ public class Test {
 		}
 	}
 	
-	public static void main(String[] args) {
-		Model model=new Model();
-		List<String> list = new ArrayList<>();
-		list.add("1");
-		list.add("2");
-		list.add("3");
-		model.setList(list);
-		model.getList().forEach(action->System.out.println(action));
-	}
+
 
 
 }

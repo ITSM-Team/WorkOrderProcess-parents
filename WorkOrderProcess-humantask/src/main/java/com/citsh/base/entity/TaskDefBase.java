@@ -1,8 +1,8 @@
 package com.citsh.base.entity;
 
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,229 +10,342 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+* TaskDefBase 任务定义.
+*/
 @Entity
-@Table(name="TASK_DEF_BASE")
-public class TaskDefBase
-  implements Serializable
-{
-  private static final long serialVersionUID = 0L;
-  private Long id;
-  private String code;
-  private String name;
-  private String processDefinitionId;
-  private String formKey;
-  private String formType;
-  private String countersignType;
-  private String countersignUser;
-  private String countersignStrategy;
-  private Integer countersignRate;
-  private String assignStrategy;
-  private String processDefinitionKey;
-  private Integer processDefinitionVersion;
-  private Set<TaskDefDeadline> taskDefDeadlines = new HashSet(0);
+@Table(name = "TASK_DEF_BASE")
+public class TaskDefBase implements java.io.Serializable {
+ private static final long serialVersionUID = 0L;
 
-  private Set<TaskDefNotification> taskDefNotifications = new HashSet(0);
+ /** 主键. */
+ private Long id;
 
-  private Set<TaskDefUser> taskDefUsers = new HashSet(0);
+ /** 主键. */
+ private String code;
 
-  private Set<TaskDefOperation> taskDefOperations = new HashSet(0);
+ /** 名称. */
+ private String name;
 
-  public TaskDefBase()
-  {
-  }
+ /** 流程定义ID. */
+ private String processDefinitionId;
 
-  public TaskDefBase(Long id) {
-    this.id = id;
-  }
+ /** 表单编号. */
+ private String formKey;
 
-  public TaskDefBase(Long id, String code, String name, String processDefinitionId, String formKey, String formType, String countersignType, String countersignUser, String countersignStrategy, Integer countersignRate, String assignStrategy, String processDefinitionKey, Integer processDefinitionVersion, Set<TaskDefDeadline> taskDefDeadlines, Set<TaskDefNotification> taskDefNotifications, Set<TaskDefUser> taskDefUsers, Set<TaskDefOperation> taskDefOperations)
-  {
-    this.id = id;
-    this.code = code;
-    this.name = name;
-    this.processDefinitionId = processDefinitionId;
-    this.formKey = formKey;
-    this.formType = formType;
-    this.countersignType = countersignType;
-    this.countersignUser = countersignUser;
-    this.countersignStrategy = countersignStrategy;
-    this.countersignRate = countersignRate;
-    this.assignStrategy = assignStrategy;
-    this.processDefinitionKey = processDefinitionKey;
-    this.processDefinitionVersion = processDefinitionVersion;
-    this.taskDefDeadlines = taskDefDeadlines;
-    this.taskDefNotifications = taskDefNotifications;
-    this.taskDefUsers = taskDefUsers;
-    this.taskDefOperations = taskDefOperations;
-  }
-  @Id
-  @Column(name="ID", unique=true, nullable=false)
-  public Long getId() {
-    return this.id;
-  }
+ /** 表单类型. */
+ private String formType;
 
-  public void setId(Long id)
-  {
-    this.id = id;
-  }
+ /** 会签类型. */
+ private String countersignType;
 
-  @Column(name="CODE", length=100)
-  public String getCode() {
-    return this.code;
-  }
+ /** 会签用户. */
+ private String countersignUser;
 
-  public void setCode(String code)
-  {
-    this.code = code;
-  }
+ /** 会签策略. */
+ private String countersignStrategy;
 
-  @Column(name="NAME", length=200)
-  public String getName() {
-    return this.name;
-  }
+ /** 会签通过率. */
+ private Integer countersignRate;
 
-  public void setName(String name)
-  {
-    this.name = name;
-  }
+ /** 分配策略. */
+ private String assignStrategy;
 
-  @Column(name="PROCESS_DEFINITION_ID", length=200)
-  public String getProcessDefinitionId() {
-    return this.processDefinitionId;
-  }
+ /** 流程标识. */
+ private String processDefinitionKey;
 
-  public void setProcessDefinitionId(String processDefinitionId)
-  {
-    this.processDefinitionId = processDefinitionId;
-  }
+ /** 流程版本. */
+ private Integer processDefinitionVersion;
 
-  @Column(name="FORM_KEY", length=200)
-  public String getFormKey() {
-    return this.formKey;
-  }
+ /** . */
+ private Set<TaskDefDeadline> taskDefDeadlines = new HashSet<TaskDefDeadline>(
+         0);
 
-  public void setFormKey(String formKey)
-  {
-    this.formKey = formKey;
-  }
+ /** . */
+ private Set<TaskDefNotification> taskDefNotifications = new HashSet<TaskDefNotification>(
+         0);
 
-  @Column(name="FORM_TYPE", length=50)
-  public String getFormType() {
-    return this.formType;
-  }
+ /** . */
+ private Set<TaskDefUser> taskDefUsers = new HashSet<TaskDefUser>(0);
 
-  public void setFormType(String formType)
-  {
-    this.formType = formType;
-  }
+ /** . */
+ private Set<TaskDefOperation> taskDefOperations = new HashSet<TaskDefOperation>(
+         0);
 
-  @Column(name="COUNTERSIGN_TYPE", length=50)
-  public String getCountersignType() {
-    return this.countersignType;
-  }
+ public TaskDefBase() {
+ }
 
-  public void setCountersignType(String countersignType)
-  {
-    this.countersignType = countersignType;
-  }
+ public TaskDefBase(Long id) {
+     this.id = id;
+ }
 
-  @Column(name="COUNTERSIGN_USER", length=200)
-  public String getCountersignUser() {
-    return this.countersignUser;
-  }
+ public TaskDefBase(Long id, String code, String name,
+         String processDefinitionId, String formKey, String formType,
+         String countersignType, String countersignUser,
+         String countersignStrategy, Integer countersignRate,
+         String assignStrategy, String processDefinitionKey,
+         Integer processDefinitionVersion,
+         Set<TaskDefDeadline> taskDefDeadlines,
+         Set<TaskDefNotification> taskDefNotifications,
+         Set<TaskDefUser> taskDefUsers,
+         Set<TaskDefOperation> taskDefOperations) {
+     this.id = id;
+     this.code = code;
+     this.name = name;
+     this.processDefinitionId = processDefinitionId;
+     this.formKey = formKey;
+     this.formType = formType;
+     this.countersignType = countersignType;
+     this.countersignUser = countersignUser;
+     this.countersignStrategy = countersignStrategy;
+     this.countersignRate = countersignRate;
+     this.assignStrategy = assignStrategy;
+     this.processDefinitionKey = processDefinitionKey;
+     this.processDefinitionVersion = processDefinitionVersion;
+     this.taskDefDeadlines = taskDefDeadlines;
+     this.taskDefNotifications = taskDefNotifications;
+     this.taskDefUsers = taskDefUsers;
+     this.taskDefOperations = taskDefOperations;
+ }
 
-  public void setCountersignUser(String countersignUser)
-  {
-    this.countersignUser = countersignUser;
-  }
+ /** @return 主键. */
+ @Id
+ @Column(name = "ID", unique = true, nullable = false)
+ public Long getId() {
+     return this.id;
+ }
 
-  @Column(name="COUNTERSIGN_STRATEGY", length=50)
-  public String getCountersignStrategy() {
-    return this.countersignStrategy;
-  }
+ /**
+  * @param id
+  *            主键.
+  */
+ public void setId(Long id) {
+     this.id = id;
+ }
 
-  public void setCountersignStrategy(String countersignStrategy)
-  {
-    this.countersignStrategy = countersignStrategy;
-  }
+ /** @return 主键. */
+ @Column(name = "CODE", length = 100)
+ public String getCode() {
+     return this.code;
+ }
 
-  @Column(name="COUNTERSIGN_RATE")
-  public Integer getCountersignRate() {
-    return this.countersignRate;
-  }
+ /**
+  * @param code
+  *            主键.
+  */
+ public void setCode(String code) {
+     this.code = code;
+ }
 
-  public void setCountersignRate(Integer countersignRate)
-  {
-    this.countersignRate = countersignRate;
-  }
+ /** @return 名称. */
+ @Column(name = "NAME", length = 200)
+ public String getName() {
+     return this.name;
+ }
 
-  @Column(name="ASSIGN_STRATEGY", length=100)
-  public String getAssignStrategy() {
-    return this.assignStrategy;
-  }
+ /**
+  * @param name
+  *            名称.
+  */
+ public void setName(String name) {
+     this.name = name;
+ }
 
-  public void setAssignStrategy(String assignStrategy)
-  {
-    this.assignStrategy = assignStrategy;
-  }
+ /** @return 流程定义ID. */
+ @Column(name = "PROCESS_DEFINITION_ID", length = 200)
+ public String getProcessDefinitionId() {
+     return this.processDefinitionId;
+ }
 
-  @Column(name="PROCESS_DEFINITION_KEY", length=100)
-  public String getProcessDefinitionKey() {
-    return this.processDefinitionKey;
-  }
+ /**
+  * @param processDefinitionId
+  *            流程定义ID.
+  */
+ public void setProcessDefinitionId(String processDefinitionId) {
+     this.processDefinitionId = processDefinitionId;
+ }
 
-  public void setProcessDefinitionKey(String processDefinitionKey)
-  {
-    this.processDefinitionKey = processDefinitionKey;
-  }
+ /** @return 表单编号. */
+ @Column(name = "FORM_KEY", length = 200)
+ public String getFormKey() {
+     return this.formKey;
+ }
 
-  @Column(name="PROCESS_DEFINITION_VERSION")
-  public Integer getProcessDefinitionVersion() {
-    return this.processDefinitionVersion;
-  }
+ /**
+  * @param formKey
+  *            表单编号.
+  */
+ public void setFormKey(String formKey) {
+     this.formKey = formKey;
+ }
 
-  public void setProcessDefinitionVersion(Integer processDefinitionVersion)
-  {
-    this.processDefinitionVersion = processDefinitionVersion;
-  }
+ /** @return 表单类型. */
+ @Column(name = "FORM_TYPE", length = 50)
+ public String getFormType() {
+     return this.formType;
+ }
 
-  @OneToMany(fetch=FetchType.LAZY, mappedBy="taskDefBase")
-  public Set<TaskDefDeadline> getTaskDefDeadlines() {
-    return this.taskDefDeadlines;
-  }
+ /**
+  * @param formType
+  *            表单类型.
+  */
+ public void setFormType(String formType) {
+     this.formType = formType;
+ }
 
-  public void setTaskDefDeadlines(Set<TaskDefDeadline> taskDefDeadlines)
-  {
-    this.taskDefDeadlines = taskDefDeadlines;
-  }
+ /** @return 会签类型. */
+ @Column(name = "COUNTERSIGN_TYPE", length = 50)
+ public String getCountersignType() {
+     return this.countersignType;
+ }
 
-  @OneToMany(fetch=FetchType.LAZY, mappedBy="taskDefBase")
-  public Set<TaskDefNotification> getTaskDefNotifications() {
-    return this.taskDefNotifications;
-  }
+ /**
+  * @param countersignType
+  *            会签类型.
+  */
+ public void setCountersignType(String countersignType) {
+     this.countersignType = countersignType;
+ }
 
-  public void setTaskDefNotifications(Set<TaskDefNotification> taskDefNotifications)
-  {
-    this.taskDefNotifications = taskDefNotifications;
-  }
+ /** @return 会签用户. */
+ @Column(name = "COUNTERSIGN_USER", length = 200)
+ public String getCountersignUser() {
+     return this.countersignUser;
+ }
 
-  @OneToMany(fetch=FetchType.LAZY, mappedBy="taskDefBase")
-  public Set<TaskDefUser> getTaskDefUsers() {
-    return this.taskDefUsers;
-  }
+ /**
+  * @param countersignUser
+  *            会签用户.
+  */
+ public void setCountersignUser(String countersignUser) {
+     this.countersignUser = countersignUser;
+ }
 
-  public void setTaskDefUsers(Set<TaskDefUser> taskDefUsers)
-  {
-    this.taskDefUsers = taskDefUsers;
-  }
+ /** @return 会签策略. */
+ @Column(name = "COUNTERSIGN_STRATEGY", length = 50)
+ public String getCountersignStrategy() {
+     return this.countersignStrategy;
+ }
 
-  @OneToMany(fetch=FetchType.LAZY, mappedBy="taskDefBase")
-  public Set<TaskDefOperation> getTaskDefOperations() {
-    return this.taskDefOperations;
-  }
+ /**
+  * @param countersignStrategy
+  *            会签策略.
+  */
+ public void setCountersignStrategy(String countersignStrategy) {
+     this.countersignStrategy = countersignStrategy;
+ }
 
-  public void setTaskDefOperations(Set<TaskDefOperation> taskDefOperations)
-  {
-    this.taskDefOperations = taskDefOperations;
-  }
+ /** @return 会签通过率. */
+ @Column(name = "COUNTERSIGN_RATE")
+ public Integer getCountersignRate() {
+     return this.countersignRate;
+ }
+
+ /**
+  * @param countersignRate
+  *            会签通过率.
+  */
+ public void setCountersignRate(Integer countersignRate) {
+     this.countersignRate = countersignRate;
+ }
+
+ /** @return 分配策略. */
+ @Column(name = "ASSIGN_STRATEGY", length = 100)
+ public String getAssignStrategy() {
+     return this.assignStrategy;
+ }
+
+ /**
+  * @param assignStrategy
+  *            分配策略.
+  */
+ public void setAssignStrategy(String assignStrategy) {
+     this.assignStrategy = assignStrategy;
+ }
+
+ /** @return 流程标识. */
+ @Column(name = "PROCESS_DEFINITION_KEY", length = 100)
+ public String getProcessDefinitionKey() {
+     return this.processDefinitionKey;
+ }
+
+ /**
+  * @param processDefinitionKey
+  *            流程标识.
+  */
+ public void setProcessDefinitionKey(String processDefinitionKey) {
+     this.processDefinitionKey = processDefinitionKey;
+ }
+
+ /** @return 流程版本. */
+ @Column(name = "PROCESS_DEFINITION_VERSION")
+ public Integer getProcessDefinitionVersion() {
+     return this.processDefinitionVersion;
+ }
+
+ /**
+  * @param processDefinitionVersion
+  *            流程版本.
+  */
+ public void setProcessDefinitionVersion(Integer processDefinitionVersion) {
+     this.processDefinitionVersion = processDefinitionVersion;
+ }
+
+ /** @return . */
+ @OneToMany(fetch = FetchType.LAZY, mappedBy = "taskDefBase")
+ public Set<TaskDefDeadline> getTaskDefDeadlines() {
+     return this.taskDefDeadlines;
+ }
+
+ /**
+  * @param taskDefDeadlines
+  *            .
+  */
+ public void setTaskDefDeadlines(Set<TaskDefDeadline> taskDefDeadlines) {
+     this.taskDefDeadlines = taskDefDeadlines;
+ }
+
+ /** @return . */
+ @OneToMany(fetch = FetchType.LAZY, mappedBy = "taskDefBase")
+ public Set<TaskDefNotification> getTaskDefNotifications() {
+     return this.taskDefNotifications;
+ }
+
+ /**
+  * @param taskDefNotifications
+  *            .
+  */
+ public void setTaskDefNotifications(
+         Set<TaskDefNotification> taskDefNotifications) {
+     this.taskDefNotifications = taskDefNotifications;
+ }
+
+ /** @return . */
+ @OneToMany(fetch = FetchType.LAZY, mappedBy = "taskDefBase")
+ public Set<TaskDefUser> getTaskDefUsers() {
+     return this.taskDefUsers;
+ }
+
+ /**
+  * @param taskDefUsers
+  *            .
+  */
+ public void setTaskDefUsers(Set<TaskDefUser> taskDefUsers) {
+     this.taskDefUsers = taskDefUsers;
+ }
+
+ /** @return . */
+ @OneToMany(fetch = FetchType.LAZY, mappedBy = "taskDefBase")
+ public Set<TaskDefOperation> getTaskDefOperations() {
+     return this.taskDefOperations;
+ }
+
+ /**
+  * @param taskDefOperations
+  *            .
+  */
+ public void setTaskDefOperations(Set<TaskDefOperation> taskDefOperations) {
+     this.taskDefOperations = taskDefOperations;
+ }
 }
+

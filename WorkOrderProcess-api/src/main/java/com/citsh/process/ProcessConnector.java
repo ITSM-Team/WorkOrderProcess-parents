@@ -2,45 +2,104 @@ package com.citsh.process;
 
 import com.citsh.from.FormDTO;
 import com.citsh.page.Page;
+
 import java.util.Map;
 
 public abstract interface ProcessConnector
 {
-  public abstract FormDTO findStartForm(String paramString);
+	 /**
+     * 获得启动表单.
+     */
+    FormDTO findStartForm(String processDefinitionId);
 
-  public abstract ProcessDTO findProcess(String paramString);
+    /**
+     * 获得流程配置.
+     */
+    ProcessDTO findProcess(String processId);
 
-  public abstract String startProcess(String paramString1, String paramString2, String paramString3, Map<String, Object> paramMap);
+    /**
+     * 发起流程.
+     */
+    String startProcess(String userId, String businessKey,
+            String processDefinitionId, Map<String, Object> processParemeters);
 
-  public abstract Page findRunningProcessInstances(String paramString1, String paramString2, Page paramPage);
+    /**
+     * 未结流程.
+     */
+    Page findRunningProcessInstances(String userId, String tenantId, Page page);
 
-  public abstract Page findCompletedProcessInstances(String paramString1, String paramString2, Page paramPage);
+    /**
+     * 已结流程.
+     */
+    Page findCompletedProcessInstances(String userId, String tenantId, Page page);
 
-  public abstract Page findInvolvedProcessInstances(String paramString1, String paramString2, Page paramPage);
+    /**
+     * 参与流程.
+     */
+    Page findInvolvedProcessInstances(String userId, String tenantId, Page page);
 
-  public abstract Page findPersonalTasks(String paramString1, String paramString2, Page paramPage);
+    /**
+     * 待办任务（个人任务）.
+     */
+    Page findPersonalTasks(String userId, String tenantId, Page page);
 
-  public abstract Page findGroupTasks(String paramString1, String paramString2, Page paramPage);
+    /**
+     * 代领任务（组任务）.
+     */
+    Page findGroupTasks(String userId, String tenantId, Page page);
 
-  public abstract Page findHistoryTasks(String paramString1, String paramString2, Page paramPage);
+    /**
+     * 已办任务（历史任务）.
+     */
+    Page findHistoryTasks(String userId, String tenantId, Page page);
 
-  public abstract Page findDelegatedTasks(String paramString1, String paramString2, Page paramPage);
+    /**
+     * 代理中的任务（代理人还未完成该任务）.
+     */
+    Page findDelegatedTasks(String userId, String tenantId, Page page);
 
-  public abstract Page findCandidateOrAssignedTasks(String paramString1, String paramString2, Page paramPage);
+    /**
+     * 同时返回已领取和未领取的任务.
+     */
+    Page findCandidateOrAssignedTasks(String userId, String tenantId, Page page);
 
-  public abstract Page findProcessDefinitions(String paramString, Page paramPage);
+    /**
+     * 流程定义.
+     */
+    Page findProcessDefinitions(String tenantId, Page page);
 
-  public abstract Page findProcessInstances(String paramString, Page paramPage);
+    /**
+     * 流程实例.
+     */
+    Page findProcessInstances(String tenantId, Page page);
 
-  public abstract Page findTasks(String paramString, Page paramPage);
+    /**
+     * 任务.
+     */
+    Page findTasks(String tenantId, Page page);
 
-  public abstract Page findDeployments(String paramString, Page paramPage);
+    /**
+     * 部署.
+     */
+    Page findDeployments(String tenantId, Page page);
 
-  public abstract Page findHistoricProcessInstances(String paramString, Page paramPage);
+    /**
+     * 历史流程实例.
+     */
+    Page findHistoricProcessInstances(String tenantId, Page page);
 
-  public abstract Page findHistoricActivityInstances(String paramString, Page paramPage);
+    /**
+     * 历史节点.
+     */
+    Page findHistoricActivityInstances(String tenantId, Page page);
 
-  public abstract Page findHistoricTaskInstances(String paramString, Page paramPage);
+    /**
+     * 历史任务.
+     */
+    Page findHistoricTaskInstances(String tenantId, Page page);
 
-  public abstract Page findJobs(String paramString, Page paramPage);
+    /**
+     * 作业.
+     */
+    Page findJobs(String tenantId, Page page);
 }

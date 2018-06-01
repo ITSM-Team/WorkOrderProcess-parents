@@ -4,8 +4,8 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<bean id="notificationConnector" class="com.citsh.notification.DefaultNotificationConnector">
-		<!-- <property name="templateConnector" ref="templateInfoServiceImpl" /> -->
-		<!-- <property name="templateService" ref="templateServiceImpl" /> -->
+		<property name="templateConnector" ref="templateInfoServiceImpl" />
+		<property name="templateService" ref="templateServiceImpl" />
 		<property name="map">
 			<map>
 				<entry key="msg" value-ref="msgNotificationHandler" />
@@ -13,10 +13,10 @@
 			</map>
 		</property>
 	</bean>
-	<bean id="msgNotificationHandler" class="com.citsh.msg.service.impl.MsgInfoServiceImpl">
+
+	<bean id="msgNotificationHandler" class="com.citsh.msg.service.impl.MsgInfoImpl">
 		<property name="defaultSender" value="${msg.default.sender}" />
 	</bean>
-
 
 	<!-- <bean id="sendmailNotificationHandler" class=""/> -->
 

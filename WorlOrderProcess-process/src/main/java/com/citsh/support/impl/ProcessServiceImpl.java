@@ -59,6 +59,9 @@ public class ProcessServiceImpl implements ProcessService {
 	@Autowired
 	private TaskDefinitionConnector taskDefinitionConnector;
 
+    /**
+     * 获得启动表单.
+     */
 	public com.citsh.from.FormDTO findStartForm(String processDefinitionId) {
 		ProcessDefinition processDefinition = (ProcessDefinition) this.processEngine.getRepositoryService()
 				.createProcessDefinitionQuery().processDefinitionId(processDefinitionId).singleResult();
@@ -160,6 +163,9 @@ public class ProcessServiceImpl implements ProcessService {
 		return processInstance.getId();
 	}
 
+    /**
+     * 未结流程.
+     */
 	public Page findRunningProcessInstances(String userId, String tenantId, Page page) {
 		HistoryService historyService = this.processEngine.getHistoryService();
 
@@ -186,6 +192,9 @@ public class ProcessServiceImpl implements ProcessService {
 		return page;
 	}
 
+    /**
+     * 已结流程.
+     */
 	public Page findCompletedProcessInstances(String userId, String tenantId, Page page) {
 		HistoryService historyService = this.processEngine.getHistoryService();
 
@@ -200,6 +209,9 @@ public class ProcessServiceImpl implements ProcessService {
 		return page;
 	}
 
+    /**
+     * 参与流程.
+     */
 	public Page findInvolvedProcessInstances(String userId, String tenantId, Page page) {
 		HistoryService historyService = this.processEngine.getHistoryService();
 
@@ -214,6 +226,9 @@ public class ProcessServiceImpl implements ProcessService {
 		return page;
 	}
 
+    /**
+     * 待办任务（个人任务）.
+     */
 	public Page findPersonalTasks(String userId, String tenantId, Page page) {
 		TaskService taskService = this.processEngine.getTaskService();
 		long count = taskService.createTaskQuery().taskTenantId(tenantId).taskAssignee(userId).active().count();
@@ -225,6 +240,9 @@ public class ProcessServiceImpl implements ProcessService {
 		return page;
 	}
 
+    /**
+     * 代领任务（组任务）.
+     */
 	public Page findGroupTasks(String userId, String tenantId, Page page) {
 		TaskService taskService = this.processEngine.getTaskService();
 		long count = taskService.createTaskQuery().taskTenantId(tenantId).taskCandidateUser(userId).active().count();
@@ -236,6 +254,9 @@ public class ProcessServiceImpl implements ProcessService {
 		return page;
 	}
 
+    /**
+     * 已办任务（历史任务）.
+     */
 	public Page findHistoryTasks(String userId, String tenantId, Page page) {
 		HistoryService historyService = this.processEngine.getHistoryService();
 
@@ -250,6 +271,9 @@ public class ProcessServiceImpl implements ProcessService {
 		return page;
 	}
 
+    /**
+     * 代理中的任务（代理人还未完成该任务）.
+     */
 	public Page findDelegatedTasks(String userId, String tenantId, Page page) {
 		TaskService taskService = this.processEngine.getTaskService();
 
@@ -263,6 +287,9 @@ public class ProcessServiceImpl implements ProcessService {
 		return page;
 	}
 
+    /**
+     * 同时返回已领取和未领取的任务.
+     */
 	public Page findCandidateOrAssignedTasks(String userId, String tenantId, Page page) {
 		TaskService taskService = this.processEngine.getTaskService();
 		long count = taskService.createTaskQuery().taskTenantId(tenantId).taskCandidateOrAssigned(userId).count();
@@ -274,6 +301,9 @@ public class ProcessServiceImpl implements ProcessService {
 		return page;
 	}
 
+    /**
+     * 流程定义.
+     */
 	public Page findProcessDefinitions(String tenantId, Page page) {
 		RepositoryService repositoryService = this.processEngine.getRepositoryService();
 		long count = repositoryService.createProcessDefinitionQuery().processDefinitionTenantId(tenantId).count();
@@ -285,6 +315,9 @@ public class ProcessServiceImpl implements ProcessService {
 		return page;
 	}
 
+    /**
+     * 流程实例.
+     */
 	public Page findProcessInstances(String tenantId, Page page) {
 		RuntimeService runtimeService = this.processEngine.getRuntimeService();
 		long count = runtimeService.createProcessInstanceQuery().processInstanceTenantId(tenantId).count();
@@ -296,6 +329,9 @@ public class ProcessServiceImpl implements ProcessService {
 		return page;
 	}
 
+    /**
+     * 任务.
+     */
 	public Page findTasks(String tenantId, Page page) {
 		TaskService taskService = this.processEngine.getTaskService();
 		long count = taskService.createTaskQuery().taskTenantId(tenantId).count();
@@ -306,6 +342,9 @@ public class ProcessServiceImpl implements ProcessService {
 		return page;
 	}
 
+    /**
+     * 部署.
+     */
 	public Page findDeployments(String tenantId, Page page) {
 		RepositoryService repositoryService = this.processEngine.getRepositoryService();
 		long count = repositoryService.createDeploymentQuery().deploymentTenantId(tenantId).count();
@@ -317,6 +356,9 @@ public class ProcessServiceImpl implements ProcessService {
 		return page;
 	}
 
+    /**
+     * 历史流程实例.
+     */
 	public Page findHistoricProcessInstances(String tenantId, Page page) {
 		HistoryService historyService = this.processEngine.getHistoryService();
 		long count = historyService.createHistoricProcessInstanceQuery().processInstanceTenantId(tenantId).count();
@@ -328,6 +370,9 @@ public class ProcessServiceImpl implements ProcessService {
 		return page;
 	}
 
+    /**
+     * 历史节点.
+     */
 	public Page findHistoricActivityInstances(String tenantId, Page page) {
 		HistoryService historyService = this.processEngine.getHistoryService();
 		long count = historyService.createHistoricActivityInstanceQuery().activityTenantId(tenantId).count();
@@ -339,6 +384,9 @@ public class ProcessServiceImpl implements ProcessService {
 		return page;
 	}
 
+    /**
+     * 历史任务.
+     */
 	public Page findHistoricTaskInstances(String tenantId, Page page) {
 		HistoryService historyService = this.processEngine.getHistoryService();
 		long count = ((HistoricTaskInstanceQuery) historyService.createHistoricTaskInstanceQuery()
@@ -352,6 +400,9 @@ public class ProcessServiceImpl implements ProcessService {
 		return page;
 	}
 
+    /**
+     * 作业.
+     */
 	public Page findJobs(String tenantId, Page page) {
 		ManagementService managementService = this.processEngine.getManagementService();
 		long count = managementService.createJobQuery().jobTenantId(tenantId).count();

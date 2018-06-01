@@ -1,5 +1,4 @@
 package com.citsh.query;
-
 public enum MatchType {
 	 /** equals. */
     EQ,

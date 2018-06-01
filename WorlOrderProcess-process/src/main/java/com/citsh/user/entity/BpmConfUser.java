@@ -1,7 +1,5 @@
 package com.citsh.user.entity;
 
-import com.citsh.config.entity.BpmConfNode;
-import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,95 +8,134 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.citsh.config.entity.BpmConfNode;
+
+/**
+ * BpmConfUser 配置用户.
+ */
 @Entity
-@Table(name="BPM_CONF_USER")
-public class BpmConfUser
-  implements Serializable
-{
-  private static final long serialVersionUID = 0L;
-  private Long id;
-  private BpmConfNode bpmConfNode;
-  private String value;
-  private Integer type;
-  private Integer status;
-  private Integer priority;
+@Table(name = "BPM_CONF_USER")
+public class BpmConfUser implements java.io.Serializable {
+    private static final long serialVersionUID = 0L;
 
-  public BpmConfUser()
-  {
-  }
+    /** 主键. */
+    private Long id;
 
-  public BpmConfUser(Long id)
-  {
-    this.id = id;
-  }
+    /** 外键，配置节点. */
+    private BpmConfNode bpmConfNode;
 
-  public BpmConfUser(Long id, BpmConfNode bpmConfNode, String value, Integer type, Integer status, Integer priority)
-  {
-    this.id = id;
-    this.bpmConfNode = bpmConfNode;
-    this.value = value;
-    this.type = type;
-    this.status = status;
-    this.priority = priority;
-  }
-  @Id
-  @Column(name="ID", unique=true, nullable=false)
-  public Long getId() {
-    return this.id;
-  }
+    /** 值. */
+    private String value;
 
-  public void setId(Long id)
-  {
-    this.id = id;
-  }
-  @ManyToOne(fetch=FetchType.LAZY)
-  @JoinColumn(name="NODE_ID")
-  public BpmConfNode getBpmConfNode() {
-    return this.bpmConfNode;
-  }
+    /** 分类. */
+    private Integer type;
 
-  public void setBpmConfNode(BpmConfNode bpmConfNode)
-  {
-    this.bpmConfNode = bpmConfNode;
-  }
+    /** 状态. */
+    private Integer status;
 
-  @Column(name="VALUE", length=200)
-  public String getValue() {
-    return this.value;
-  }
+    /** 排序. */
+    private Integer priority;
 
-  public void setValue(String value)
-  {
-    this.value = value;
-  }
+    public BpmConfUser() {
+    }
 
-  @Column(name="TYPE")
-  public Integer getType() {
-    return this.type;
-  }
+    public BpmConfUser(Long id) {
+        this.id = id;
+    }
 
-  public void setType(Integer type)
-  {
-    this.type = type;
-  }
+    public BpmConfUser(Long id, BpmConfNode bpmConfNode, String value,
+            Integer type, Integer status, Integer priority) {
+        this.id = id;
+        this.bpmConfNode = bpmConfNode;
+        this.value = value;
+        this.type = type;
+        this.status = status;
+        this.priority = priority;
+    }
 
-  @Column(name="STATUS")
-  public Integer getStatus() {
-    return this.status;
-  }
+    /** @return 主键. */
+    @Id
+    @Column(name = "ID", unique = true, nullable = false)
+    public Long getId() {
+        return this.id;
+    }
 
-  public void setStatus(Integer status)
-  {
-    this.status = status;
-  }
+    /**
+     * @param id
+     *            主键.
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-  @Column(name="PRIORITY")
-  public Integer getPriority() {
-    return this.priority;
-  }
+    /** @return 外键，配置节点. */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "NODE_ID")
+    public BpmConfNode getBpmConfNode() {
+        return this.bpmConfNode;
+    }
 
-  public void setPriority(Integer priority)
-  {
-    this.priority = priority;
-  }
+    /**
+     * @param bpmConfNode
+     *            外键，配置节点.
+     */
+    public void setBpmConfNode(BpmConfNode bpmConfNode) {
+        this.bpmConfNode = bpmConfNode;
+    }
+
+    /** @return 值. */
+    @Column(name = "VALUE", length = 200)
+    public String getValue() {
+        return this.value;
+    }
+
+    /**
+     * @param value
+     *            值.
+     */
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    /** @return 分类. */
+    @Column(name = "TYPE")
+    public Integer getType() {
+        return this.type;
+    }
+
+    /**
+     * @param type
+     *            分类.
+     */
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    /** @return 状态. */
+    @Column(name = "STATUS")
+    public Integer getStatus() {
+        return this.status;
+    }
+
+    /**
+     * @param status
+     *            状态.
+     */
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    /** @return 排序. */
+    @Column(name = "PRIORITY")
+    public Integer getPriority() {
+        return this.priority;
+    }
+
+    /**
+     * @param priority
+     *            排序.
+     */
+    public void setPriority(Integer priority) {
+        this.priority = priority;
+    }
 }

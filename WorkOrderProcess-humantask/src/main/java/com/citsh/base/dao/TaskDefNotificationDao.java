@@ -5,6 +5,5 @@ import com.citsh.dao.jpa.BaseDao;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public abstract interface TaskDefNotificationDao extends BaseDao<TaskDefNotification, Long>
-{
+public abstract interface TaskDefNotificationDao extends BaseDao<TaskDefNotification, Long> {
 }

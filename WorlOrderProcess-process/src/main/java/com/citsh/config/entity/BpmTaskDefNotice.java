@@ -1,8 +1,5 @@
 package com.citsh.config.entity;
 
-import com.citsh.notice.entity.BpmMailTemplate;
-import com.citsh.process.entity.BpmProcess;
-import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,107 +8,156 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.citsh.notice.entity.BpmMailTemplate;
+import com.citsh.process.entity.BpmProcess;
+
+/**
+ * BpmTaskDefNotice .
+ */
 @Entity
-@Table(name="BPM_TASK_DEF_NOTICE")
-public class BpmTaskDefNotice
-  implements Serializable
-{
-  private static final long serialVersionUID = 0L;
-  private Long id;
-  private BpmMailTemplate bpmMailTemplate;
-  private BpmProcess bpmProcess;
-  private String taskDefinitionKey;
-  private Integer type;
-  private String receiver;
-  private String dueDate;
+@Table(name = "BPM_TASK_DEF_NOTICE")
+public class BpmTaskDefNotice implements java.io.Serializable {
+    private static final long serialVersionUID = 0L;
 
-  public BpmTaskDefNotice()
-  {
-  }
 
-  public BpmTaskDefNotice(Long id)
-  {
-    this.id = id;
-  }
+    private Long id;
 
-  public BpmTaskDefNotice(Long id, BpmMailTemplate bpmMailTemplate, BpmProcess bpmProcess, String taskDefinitionKey, Integer type, String receiver, String dueDate)
-  {
-    this.id = id;
-    this.bpmMailTemplate = bpmMailTemplate;
-    this.bpmProcess = bpmProcess;
-    this.taskDefinitionKey = taskDefinitionKey;
-    this.type = type;
-    this.receiver = receiver;
-    this.dueDate = dueDate;
-  }
-  @Id
-  @Column(name="ID", unique=true, nullable=false)
-  public Long getId() {
-    return this.id;
-  }
 
-  public void setId(Long id)
-  {
-    this.id = id;
-  }
-  @ManyToOne(fetch=FetchType.LAZY)
-  @JoinColumn(name="TEMPLATE_ID")
-  public BpmMailTemplate getBpmMailTemplate() {
-    return this.bpmMailTemplate;
-  }
+    private BpmMailTemplate bpmMailTemplate;
 
-  public void setBpmMailTemplate(BpmMailTemplate bpmMailTemplate)
-  {
-    this.bpmMailTemplate = bpmMailTemplate;
-  }
-  @ManyToOne(fetch=FetchType.LAZY)
-  @JoinColumn(name="PROCESS_ID")
-  public BpmProcess getBpmProcess() {
-    return this.bpmProcess;
-  }
 
-  public void setBpmProcess(BpmProcess bpmProcess)
-  {
-    this.bpmProcess = bpmProcess;
-  }
+    private BpmProcess bpmProcess;
 
-  @Column(name="TASK_DEFINITION_KEY", length=200)
-  public String getTaskDefinitionKey() {
-    return this.taskDefinitionKey;
-  }
 
-  public void setTaskDefinitionKey(String taskDefinitionKey)
-  {
-    this.taskDefinitionKey = taskDefinitionKey;
-  }
+    private String taskDefinitionKey;
 
-  @Column(name="TYPE")
-  public Integer getType() {
-    return this.type;
-  }
 
-  public void setType(Integer type)
-  {
-    this.type = type;
-  }
+    private Integer type;
 
-  @Column(name="RECEIVER", length=200)
-  public String getReceiver() {
-    return this.receiver;
-  }
 
-  public void setReceiver(String receiver)
-  {
-    this.receiver = receiver;
-  }
+    private String receiver;
 
-  @Column(name="DUE_DATE", length=50)
-  public String getDueDate() {
-    return this.dueDate;
-  }
 
-  public void setDueDate(String dueDate)
-  {
-    this.dueDate = dueDate;
-  }
+    private String dueDate;
+
+    public BpmTaskDefNotice() {
+    }
+
+    public BpmTaskDefNotice(Long id) {
+        this.id = id;
+    }
+
+    public BpmTaskDefNotice(Long id, BpmMailTemplate bpmMailTemplate,
+            BpmProcess bpmProcess, String taskDefinitionKey, Integer type,
+            String receiver, String dueDate) {
+        this.id = id;
+        this.bpmMailTemplate = bpmMailTemplate;
+        this.bpmProcess = bpmProcess;
+        this.taskDefinitionKey = taskDefinitionKey;
+        this.type = type;
+        this.receiver = receiver;
+        this.dueDate = dueDate;
+    }
+
+    /** @return null. */
+    @Id
+    @Column(name = "ID", unique = true, nullable = false)
+    public Long getId() {
+        return this.id;
+    }
+
+    /**
+     * @param id
+     *            null.
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /** @return null. */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "TEMPLATE_ID")
+    public BpmMailTemplate getBpmMailTemplate() {
+        return this.bpmMailTemplate;
+    }
+
+    /**
+     * @param bpmMailTemplate
+     *            null.
+     */
+    public void setBpmMailTemplate(BpmMailTemplate bpmMailTemplate) {
+        this.bpmMailTemplate = bpmMailTemplate;
+    }
+
+    /** @return null. */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PROCESS_ID")
+    public BpmProcess getBpmProcess() {
+        return this.bpmProcess;
+    }
+
+    /**
+     * @param bpmProcess
+     *            null.
+     */
+    public void setBpmProcess(BpmProcess bpmProcess) {
+        this.bpmProcess = bpmProcess;
+    }
+
+    /** @return null. */
+    @Column(name = "TASK_DEFINITION_KEY", length = 200)
+    public String getTaskDefinitionKey() {
+        return this.taskDefinitionKey;
+    }
+
+    /**
+     * @param taskDefinitionKey
+     *            null.
+     */
+    public void setTaskDefinitionKey(String taskDefinitionKey) {
+        this.taskDefinitionKey = taskDefinitionKey;
+    }
+
+    /** @return null. */
+    @Column(name = "TYPE")
+    public Integer getType() {
+        return this.type;
+    }
+
+    /**
+     * @param type
+     *            null.
+     */
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    /** @return null. */
+    @Column(name = "RECEIVER", length = 200)
+    public String getReceiver() {
+        return this.receiver;
+    }
+
+    /**
+     * @param receiver
+     *            null.
+     */
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
+    }
+
+    /** @return null. */
+    @Column(name = "DUE_DATE", length = 50)
+    public String getDueDate() {
+        return this.dueDate;
+    }
+
+    /**
+     * @param dueDate
+     *            null.
+     */
+    public void setDueDate(String dueDate) {
+        this.dueDate = dueDate;
+    }
 }
+

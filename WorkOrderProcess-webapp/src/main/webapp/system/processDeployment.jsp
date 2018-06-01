@@ -13,11 +13,14 @@
 </head>
 <body>
 <div class="place">
-		<span>位置：</span>
+		<span><spring:message code="position" text="位置" />：</span>
 		<ul class="placeul">
-			<li><a href="#">系统设置</a></li>
-			<li><a href="#">流程设计</a></li>
-			<li><a href="#">流程部署</a></li>
+			<li><a href="#"><spring:message code="systemSettings"
+						text="系统设置" /></a></li>
+			<li><a href="#"><spring:message code="processManage"
+						text="流程设计" /></a></li>
+			<li><a href="#"><spring:message code="processDeployment"
+						text="流程部署" /></a></li>
 		</ul>
 	</div>
 
@@ -25,36 +28,28 @@
 		<table class="tablelist">
 			<thead>
 				<tr>
-					<th>编号</th>
-					<th>名称</th>
-					<th>部署时间</th>
-					<th>分类</th>
-					<th>操作</th>
+					<th><spring:message code="id" text="编号" /></th>
+					<th><spring:message code="name" text="名称" /></th>
+					<th><spring:message code="createTime" text="名称" /></th>
+					<th><spring:message code="category" text="分类" /></th>
+					<th><spring:message code="operating" text="操作" /></th>
 				</tr>
 			</thead>
 			<tbody>
+			<c:forEach var="deployment" items="${page.result}">
 				<tr>
-					<td>16</td>
-					<td>测试流程</td>
-					<td>2018-04-23 10:09:09</td>
-					<td>通用流程</td>
+					<td>${deployment.id}</td>
+					<td>${deployment.name}</td>
+					<td><fmt:formatDate value="${deployment.deploymentTime}" pattern="yyyy-MM-dd hh:mm:ss" /></td>
+					<td>${deployment.category}</td>
 					<td>
-						<a href="#" class="ope">删除</a>&nbsp;
-						<a href="${ctx }/system/processDeployment_view.jsp" class="ope">查看资源</a>
+						<a href="#" class="ope"><spring:message code="delete" text="删除" /></a>&nbsp;
+						<a href="${ctx }/deploy/listDeploymentResourceNames?deploymentId=${deployment.id}" class="ope">
+							<spring:message code="view" text="查看" />
+						</a>
 					</td>
 				</tr>
-				
-				<tr>
-					<td>16</td>
-					<td>测试流程</td>
-					<td>2018-04-23 10:09:09</td>
-					<td>通用流程</td>
-					<td>
-						<a href="#" class="ope">删除</a>&nbsp;
-						<a href="${ctx }/system/processDeployment_view.jsp" class="ope">查看资源</a>
-					</td>
-				</tr>
-
+				</c:forEach>
 			</tbody>
 		</table>
 

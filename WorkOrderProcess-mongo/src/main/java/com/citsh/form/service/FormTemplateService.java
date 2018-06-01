@@ -1,7 +1,20 @@
 package com.citsh.form.service;
 
-import com.citsh.from.FormConnector;
+import java.util.List;
 
-public abstract interface FormTemplateService extends FormConnector
-{
+import org.springframework.data.mongodb.core.query.Query;
+
+import com.citsh.form.entity.FormTemplate;
+import com.citsh.from.FormConnector;
+import com.citsh.page.Page;
+import com.citsh.query.PropertyFilter;
+
+public abstract interface FormTemplateService extends FormConnector {
+	public Page pageQuery(Page page, List<PropertyFilter> propertyFilters, Query query);
+
+	public FormTemplate findById(Long id);
+
+	public FormTemplate save(FormTemplate formTemplate);
+
+	public FormTemplate remove(Query query);
 }

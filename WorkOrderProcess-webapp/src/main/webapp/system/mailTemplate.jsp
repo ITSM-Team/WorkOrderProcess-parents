@@ -119,7 +119,7 @@
 			
 		}
 		function sms(){
-			location.href="smsTemplate.do"
+			window.location.href="smsTemplate.do"
 		}
 	</script>
 </body>

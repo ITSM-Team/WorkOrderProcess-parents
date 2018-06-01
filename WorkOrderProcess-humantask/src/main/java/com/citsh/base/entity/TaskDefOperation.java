@@ -1,6 +1,5 @@
 package com.citsh.base.entity;
 
-import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,95 +8,133 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+* TaskDefOperation 任务定义操作.
+*/
 @Entity
-@Table(name="TASK_DEF_OPERATION")
-public class TaskDefOperation
-  implements Serializable
-{
-  private static final long serialVersionUID = 0L;
-  private Long id;
-  private TaskDefBase taskDefBase;
-  private String value;
-  private String type;
-  private String status;
-  private Integer priority;
+@Table(name = "TASK_DEF_OPERATION")
+public class TaskDefOperation implements java.io.Serializable {
+ private static final long serialVersionUID = 0L;
 
-  public TaskDefOperation()
-  {
-  }
+ /** 主键. */
+ private Long id;
 
-  public TaskDefOperation(Long id)
-  {
-    this.id = id;
-  }
+ /** 外键，任务定义. */
+ private TaskDefBase taskDefBase;
 
-  public TaskDefOperation(Long id, TaskDefBase taskDefBase, String value, String type, String status, Integer priority)
-  {
-    this.id = id;
-    this.taskDefBase = taskDefBase;
-    this.value = value;
-    this.type = type;
-    this.status = status;
-    this.priority = priority;
-  }
-  @Id
-  @Column(name="ID", unique=true, nullable=false)
-  public Long getId() {
-    return this.id;
-  }
+ /** 值. */
+ private String value;
 
-  public void setId(Long id)
-  {
-    this.id = id;
-  }
-  @ManyToOne(fetch=FetchType.LAZY)
-  @JoinColumn(name="BASE_ID")
-  public TaskDefBase getTaskDefBase() {
-    return this.taskDefBase;
-  }
+ /** 类型. */
+ private String type;
 
-  public void setTaskDefBase(TaskDefBase taskDefBase)
-  {
-    this.taskDefBase = taskDefBase;
-  }
+ /** 状态. */
+ private String status;
 
-  @Column(name="VALUE", length=200)
-  public String getValue() {
-    return this.value;
-  }
+ /** 排序. */
+ private Integer priority;
 
-  public void setValue(String value)
-  {
-    this.value = value;
-  }
+ public TaskDefOperation() {
+ }
 
-  @Column(name="TYPE", length=50)
-  public String getType() {
-    return this.type;
-  }
+ public TaskDefOperation(Long id) {
+     this.id = id;
+ }
 
-  public void setType(String type)
-  {
-    this.type = type;
-  }
+ public TaskDefOperation(Long id, TaskDefBase taskDefBase, String value,
+         String type, String status, Integer priority) {
+     this.id = id;
+     this.taskDefBase = taskDefBase;
+     this.value = value;
+     this.type = type;
+     this.status = status;
+     this.priority = priority;
+ }
 
-  @Column(name="STATUS", length=50)
-  public String getStatus() {
-    return this.status;
-  }
+ /** @return 主键. */
+ @Id
+ @Column(name = "ID", unique = true, nullable = false)
+ public Long getId() {
+     return this.id;
+ }
 
-  public void setStatus(String status)
-  {
-    this.status = status;
-  }
+ /**
+  * @param id
+  *            主键.
+  */
+ public void setId(Long id) {
+     this.id = id;
+ }
 
-  @Column(name="PRIORITY")
-  public Integer getPriority() {
-    return this.priority;
-  }
+ /** @return 外键，任务定义. */
+ @ManyToOne(fetch = FetchType.LAZY)
+ @JoinColumn(name = "BASE_ID")
+ public TaskDefBase getTaskDefBase() {
+     return this.taskDefBase;
+ }
 
-  public void setPriority(Integer priority)
-  {
-    this.priority = priority;
-  }
+ /**
+  * @param taskDefBase
+  *            外键，任务定义.
+  */
+ public void setTaskDefBase(TaskDefBase taskDefBase) {
+     this.taskDefBase = taskDefBase;
+ }
+
+ /** @return 值. */
+ @Column(name = "VALUE", length = 200)
+ public String getValue() {
+     return this.value;
+ }
+
+ /**
+  * @param value
+  *            值.
+  */
+ public void setValue(String value) {
+     this.value = value;
+ }
+
+ /** @return 类型. */
+ @Column(name = "TYPE", length = 50)
+ public String getType() {
+     return this.type;
+ }
+
+ /**
+  * @param type
+  *            类型.
+  */
+ public void setType(String type) {
+     this.type = type;
+ }
+
+ /** @return 状态. */
+ @Column(name = "STATUS", length = 50)
+ public String getStatus() {
+     return this.status;
+ }
+
+ /**
+  * @param status
+  *            状态.
+  */
+ public void setStatus(String status) {
+     this.status = status;
+ }
+
+ /** @return 排序. */
+ @Column(name = "PRIORITY")
+ public Integer getPriority() {
+     return this.priority;
+ }
+
+ /**
+  * @param priority
+  *            排序.
+  */
+ public void setPriority(Integer priority) {
+     this.priority = priority;
+ }
 }
+

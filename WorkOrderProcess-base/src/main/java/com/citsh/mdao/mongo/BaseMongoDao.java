@@ -16,8 +16,9 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
+
 @Repository
-public abstract class BaseMongoDao<T>{
+public abstract class BaseMongoDao<T> {
 
 	@Autowired
 	protected MongoTemplate mongoTemplate;
@@ -26,12 +27,22 @@ public abstract class BaseMongoDao<T>{
 
 	public T save(T entity) {
 		this.mongoTemplate.save(entity);
-		return entity;
+		Object id = findIdValue(entity);
+		if ((id == null) || ("".equals(id.toString().trim()))) {
+			return null;
+		}
+		Long entityid = Long.valueOf(id.toString());
+		return findById(entityid);
 	}
 
 	public T insert(T entity) {
 		this.mongoTemplate.insert(entity);
-		return entity;
+		Object id = findIdValue(entity);
+		if ((id == null) || ("".equals(id.toString().trim()))) {
+			return null;
+		}
+		Long entityid = Long.valueOf(id.toString());
+		return findById(entityid);
 	}
 
 	public T findById(Long id) {
@@ -110,7 +121,10 @@ public abstract class BaseMongoDao<T>{
 		return this.mongoTemplate.findAndModify(query, update, getEntityClass());
 	}
 
-	public WriteResult update(T entity) {
+	/**
+	 * 获取id的值
+	 */
+	public Object findIdValue(T entity) {
 		Field[] fields = getEntityClass().getDeclaredFields();
 		if ((fields == null) || (fields.length <= 0)) {
 			return null;
@@ -136,6 +150,12 @@ public abstract class BaseMongoDao<T>{
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		}
+		return id;
+	}
+
+	public WriteResult update(T entity) {
+		Object id = this.findIdValue(entity);
+
 		if ((id == null) || ("".equals(id.toString().trim()))) {
 			return null;
 		}
@@ -149,13 +169,21 @@ public abstract class BaseMongoDao<T>{
 		return this.mongoTemplate.updateFirst(query, update, getEntityClass());
 	}
 
-	public void remove(Query query) {
-		this.mongoTemplate.remove(query, getEntityClass());
+	public T remove(Query query) {
+		T entity = this.mongoTemplate.findAndRemove(query, getEntityClass());
+		if (entity == null) {
+			return null;
+		}
+		return entity;
 	}
 
-	public void remove(Long id) {
+	public T remove(Long id) {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("_id").is(id));
-		this.mongoTemplate.remove(query, getEntityClass());
+		T entity = this.mongoTemplate.findAndRemove(query, getEntityClass());
+		if (entity == null) {
+			return null;
+		}
+		return entity;
 	}
 }

@@ -11,6 +11,10 @@
 <link href="${cdnPrefix}/xform3/styles/xform.css" rel="stylesheet">
 <script type="text/javascript" src="${cdnPrefix}/xform3/xform-packed.js"></script>
 <script type="text/javascript" src="${cdnPrefix}/xform3/adaptor.js"></script>
+<link rel="stylesheet" href="${cdnPrefix}/date_plugin/jedate.css" />
+<script type="text/javascript" src="${cdnPrefix}/date_plugin/jedate.js"></script>
+
+
 <script type="text/javascript">
 $(function(){
 	

@@ -1,48 +1,126 @@
 package com.citsh.humantask;
-
 import java.util.List;
+public interface TaskDefinitionConnector {
+	  /**
+     * 获取分配策略.
+     */
+    String findTaskAssignStrategy(String taskDefinitionKey,
+            String processDefinitionId);
 
-public abstract interface TaskDefinitionConnector
-{
-  public abstract String findTaskAssignStrategy(String paramString1, String paramString2);
+    /**
+     * 获取会签配置.
+     */
+    CounterSignDTO findCounterSign(String taskDefinitionKey,
+            String processDefinitionId);
 
-  public abstract CounterSignDTO findCounterSign(String paramString1, String paramString2);
+    /**
+     * 获取表单配置.
+     */
+    FormDTO findForm(String taskDefinitionKey, String processDefinitionId);
 
-  public abstract FormDTO findForm(String paramString1, String paramString2);
+    /**
+     * 获取操作配置.
+     */
+    List<String> findOperations(String taskDefinitionKey,
+            String processDefinitionId);
 
-  public abstract List<String> findOperations(String paramString1, String paramString2);
+    /**
+     * 获取参与者.
+     */
+    List<TaskUserDTO> findTaskUsers(String taskDefinitionKey,
+            String processDefinitionId);
 
-  public abstract List<TaskUserDTO> findTaskUsers(String paramString1, String paramString2);
+    /**
+     * 获取截止日期.
+     */
+    List<DeadlineDTO> findDeadlines(String taskDefinitionKey,
+            String processDefinitionId);
 
-  public abstract List<DeadlineDTO> findDeadlines(String paramString1, String paramString2);
+    /**
+     * 获取流程实例对应的参与者配置.
+     */
+    String findTaskConfUser(String taskDefinitionKey, String businessKey);
 
-  public abstract String findTaskConfUser(String paramString1, String paramString2);
+    /**
+     * 获取提醒配置.
+     */
+    List<TaskNotificationDTO> findTaskNotifications(String taskDefinitionKey,
+            String processDefinitionId, String eventName);
 
-  public abstract List<TaskNotificationDTO> findTaskNotifications(String paramString1, String paramString2, String paramString3);
+    /**
+     * 创建新的任务定义.
+     */
+    void create(TaskDefinitionDTO taskDefinition);
 
-  public abstract void create(TaskDefinitionDTO paramTaskDefinitionDTO);
+    /**
+     * 保存分配策略.
+     */
+    void saveAssignStrategy(String taskDefinitionKey,
+            String processDefinitoinId, String assigneeStrategy);
 
-  public abstract void saveAssignStrategy(String paramString1, String paramString2, String paramString3);
+    /**
+     * 保存会签配置.
+     */
+    void saveCounterSign(String taskDefinitionKey, String processDefinitionId,
+            CounterSignDTO counterSign);
 
-  public abstract void saveCounterSign(String paramString1, String paramString2, CounterSignDTO paramCounterSignDTO);
+    /**
+     * 保存表单配置.
+     */
+    void saveForm(String taskDefinitionKey, String processDefinitionId,
+            FormDTO form);
 
-  public abstract void saveForm(String paramString1, String paramString2, FormDTO paramFormDTO);
+    /**
+     * 添加操作.
+     */
+    void addOperation(String taskDefinitionKey, String processDefinitionId,
+            String operation);
 
-  public abstract void addOperation(String paramString1, String paramString2, String paramString3);
+    /**
+     * 删除操作.
+     */
+    void removeOperation(String taskDefinitionKey, String processDefinitionId,
+            String operation);
 
-  public abstract void removeOperation(String paramString1, String paramString2, String paramString3);
+    /**
+     * 添加参与者.
+     */
+    void addTaskUser(String taskDefinitionKey, String processDefinitionId,
+            TaskUserDTO taskUser);
 
-  public abstract void addTaskUser(String paramString1, String paramString2, TaskUserDTO paramTaskUserDTO);
+    /**
+     * 删除参与者.
+     */
+    void removeTaskUser(String taskDefinitionKey, String processDefinitionId,
+            TaskUserDTO taskUser);
 
-  public abstract void removeTaskUser(String paramString1, String paramString2, TaskUserDTO paramTaskUserDTO);
+    /**
+     * 更新参与者.
+     */
+    void updateTaskUser(String taskDefinitionKey, String processDefinitionId,
+            TaskUserDTO taskUser, String status);
 
-  public abstract void updateTaskUser(String paramString1, String paramString2, TaskUserDTO paramTaskUserDTO, String paramString3);
+    /**
+     * 新增提醒.
+     */
+    void addTaskNotification(String taskDefinitionKey,
+            String processDefinitionId, TaskNotificationDTO taskNotification);
 
-  public abstract void addTaskNotification(String paramString1, String paramString2, TaskNotificationDTO paramTaskNotificationDTO);
+    /**
+     * 删除提醒.
+     */
+    void removeTaskNotification(String taskDefinitionKey,
+            String processDefinitionId, TaskNotificationDTO taskNotification);
 
-  public abstract void removeTaskNotification(String paramString1, String paramString2, TaskNotificationDTO paramTaskNotificationDTO);
+    /**
+     * 新增截止.
+     */
+    void addDeadline(String taskDefinitionKey, String processDefinitionId,
+            DeadlineDTO deadline);
 
-  public abstract void addDeadline(String paramString1, String paramString2, DeadlineDTO paramDeadlineDTO);
-
-  public abstract void removeDeadline(String paramString1, String paramString2, DeadlineDTO paramDeadlineDTO);
+    /**
+     * 删除截止.
+     */
+    void removeDeadline(String taskDefinitionKey, String processDefinitionId,
+            DeadlineDTO deadline);
 }

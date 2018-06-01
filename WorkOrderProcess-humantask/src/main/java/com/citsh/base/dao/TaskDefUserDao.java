@@ -1,5 +1,4 @@
 package com.citsh.base.dao;
-
 import com.citsh.base.entity.TaskDefUser;
 import com.citsh.dao.jpa.BaseDao;
 import org.springframework.stereotype.Repository;

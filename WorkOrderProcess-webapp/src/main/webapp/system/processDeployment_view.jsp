@@ -35,12 +35,11 @@
 					</tr>
 				</thead>
 				<tbody>
+				<c:forEach var="deploymentResourceName" items="${deploymentResourceNames}">
 					<tr>
-						<td>测试流程.bpmn20.xml</td>
+						<td>${deploymentResourceName}</td>
 					</tr>
-					<tr>
-						<td>测试流程.process.png</td>
-					</tr>
+				</c:forEach>
 				</tbody>
 			</table>
 		</div>

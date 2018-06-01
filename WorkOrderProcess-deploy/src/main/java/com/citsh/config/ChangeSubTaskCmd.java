@@ -5,46 +5,40 @@ import org.activiti.engine.impl.context.Context;
 import org.activiti.engine.impl.interceptor.Command;
 import org.activiti.engine.impl.interceptor.CommandContext;
 import org.activiti.engine.impl.persistence.entity.TaskEntity;
-import org.activiti.engine.impl.persistence.entity.TaskEntityManager;
 
-public class ChangeSubTaskCmd
-  implements Command<Object>
-{
-  private String taskId;
-  private String userId;
+public class ChangeSubTaskCmd implements Command<Object> {
+	private String taskId;
+	private String userId;
 
-  public ChangeSubTaskCmd(String taskId, String userId)
-  {
-    this.taskId = taskId;
-    this.userId = userId;
-  }
+	public ChangeSubTaskCmd(String taskId, String userId) {
+		this.taskId = taskId;
+		this.userId = userId;
+	}
 
-  public Object execute(CommandContext commandContext)
-  {
-    TaskEntity parentTask = commandContext.getTaskEntityManager()
-      .findTaskById(this.taskId);
+	public Object execute(CommandContext commandContext) {
+		TaskEntity parentTask = commandContext.getTaskEntityManager().findTaskById(this.taskId);
 
-    createSubTask(parentTask, parentTask.getAssignee());
-    createSubTask(parentTask, this.userId);
-    parentTask.setAssigneeWithoutCascade(null);
+		createSubTask(parentTask, parentTask.getAssignee());
+		createSubTask(parentTask, this.userId);
+		parentTask.setAssigneeWithoutCascade(null);
 
-    return null;
-  }
+		return null;
+	}
 
-  public void createSubTask(TaskEntity parentTask, String assignee) {
-    TaskEntity task = TaskEntity.create(new Date());
-    task.setProcessDefinitionId(parentTask.getProcessDefinitionId());
+	public void createSubTask(TaskEntity parentTask, String assignee) {
+		TaskEntity task = TaskEntity.create(new Date());
+		task.setProcessDefinitionId(parentTask.getProcessDefinitionId());
 
-    task.setAssigneeWithoutCascade(assignee);
-    task.setParentTaskIdWithoutCascade(parentTask.getId());
-    task.setNameWithoutCascade(parentTask.getName());
-    task.setTaskDefinitionKey(parentTask.getTaskDefinitionKey());
-    task.setExecutionId(parentTask.getExecutionId());
-    task.setPriority(parentTask.getPriority());
-    task.setProcessInstanceId(parentTask.getProcessInstanceId());
-    task.setDescriptionWithoutCascade(parentTask.getDescription());
-    task.setCategory("subtask");
+		task.setAssigneeWithoutCascade(assignee);
+		task.setParentTaskIdWithoutCascade(parentTask.getId());
+		task.setNameWithoutCascade(parentTask.getName());
+		task.setTaskDefinitionKey(parentTask.getTaskDefinitionKey());
+		task.setExecutionId(parentTask.getExecutionId());
+		task.setPriority(parentTask.getPriority());
+		task.setProcessInstanceId(parentTask.getProcessInstanceId());
+		task.setDescriptionWithoutCascade(parentTask.getDescription());
+		task.setCategory("subtask");
 
-    Context.getCommandContext().getTaskEntityManager().insert(task);
-  }
+		Context.getCommandContext().getTaskEntityManager().insert(task);
+	}
 }

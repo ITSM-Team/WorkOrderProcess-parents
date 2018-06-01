@@ -1,6 +1,6 @@
 package com.citsh.auto;
 
-public class MockCurrentUserHolder
+public class MockCurrentUserHolder implements CurrentUserHolder
 {
   public String getUserId()
   {

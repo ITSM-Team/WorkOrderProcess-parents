@@ -10,23 +10,20 @@ import org.springframework.stereotype.Service;
 
 @Transactional
 @Service
-public class TaskDefBaseServiceImpl
-  implements TaskDefBaseService
-{
+public class TaskDefBaseServiceImpl implements TaskDefBaseService {
 
-  @Autowired
-  private TaskDefBaseDao taskDefBaseDao;
+	@Autowired
+	private TaskDefBaseDao taskDefBaseDao;
 
-  public TaskDefBase findByCodeAndProIdOne(String condition, Object[] args)
-  {
-    List list = this.taskDefBaseDao.listBySQL(condition, args);
-    if (list.size() > 0) {
-      return (TaskDefBase)list.get(0);
-    }
-    return null;
-  }
+	public TaskDefBase findByCodeAndProIdOne(String condition, Object... args) {
+		List<TaskDefBase> list = this.taskDefBaseDao.listBySQL(condition, args);
+		if (list.size() > 0) {
+			return (TaskDefBase) list.get(0);
+		}
+		return null;
+	}
 
-  public TaskDefBase save(TaskDefBase taskDefBase) {
-    return (TaskDefBase)this.taskDefBaseDao.save(taskDefBase);
-  }
+	public TaskDefBase save(TaskDefBase taskDefBase) {
+		return (TaskDefBase) this.taskDefBaseDao.save(taskDefBase);
+	}
 }

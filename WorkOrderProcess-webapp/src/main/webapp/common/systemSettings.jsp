@@ -11,7 +11,7 @@
 	<frame src="settings_top.jsp" name="topFrame" scrolling="No" noresize="noresize" id="topFrame" title="topFrame" />
 	<frameset cols="187,*" frameborder="no" border="0" framespacing="0">
 		<frame src="settings_left.jsp" name="leftFrame" scrolling="No" noresize="noresize" id="leftFrame" title="leftFrame" />
-		<frame src="${ctx}/system/processDesign.jsp" name="rightFrame" id="rightFrame" title="rightFrame" />
+		<frame src="${ctx}/modeler/modeler-list.do" name="rightFrame" id="rightFrame" title="rightFrame" />
 	</frameset>
 </frameset>
 <noframes>

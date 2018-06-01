@@ -1,75 +1,97 @@
 package com.citsh.base.entity;
-
-import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+* TaskConfUser 任务实例配置用户.
+*/
 @Entity
-@Table(name="TASK_CONF_USER")
-public class TaskConfUser
-  implements Serializable
-{
-  private static final long serialVersionUID = 0L;
-  private Long id;
-  private String businessKey;
-  private String code;
-  private String value;
+@Table(name = "TASK_CONF_USER")
+public class TaskConfUser implements java.io.Serializable {
+ private static final long serialVersionUID = 0L;
 
-  public TaskConfUser()
-  {
-  }
+ /** 主键. */
+ private Long id;
 
-  public TaskConfUser(Long id)
-  {
-    this.id = id;
-  }
+ /** 业务标识. */
+ private String businessKey;
 
-  public TaskConfUser(Long id, String businessKey, String code, String value) {
-    this.id = id;
-    this.businessKey = businessKey;
-    this.code = code;
-    this.value = value;
-  }
-  @Id
-  @Column(name="ID", unique=true, nullable=false)
-  public Long getId() {
-    return this.id;
-  }
+ /** 编码. */
+ private String code;
 
-  public void setId(Long id)
-  {
-    this.id = id;
-  }
+ /** 值. */
+ private String value;
 
-  @Column(name="BUSINESS_KEY", length=200)
-  public String getBusinessKey() {
-    return this.businessKey;
-  }
+ public TaskConfUser() {
+ }
 
-  public void setBusinessKey(String businessKey)
-  {
-    this.businessKey = businessKey;
-  }
+ public TaskConfUser(Long id) {
+     this.id = id;
+ }
 
-  @Column(name="CODE", length=200)
-  public String getCode() {
-    return this.code;
-  }
+ public TaskConfUser(Long id, String businessKey, String code, String value) {
+     this.id = id;
+     this.businessKey = businessKey;
+     this.code = code;
+     this.value = value;
+ }
 
-  public void setCode(String code)
-  {
-    this.code = code;
-  }
+ /** @return 主键. */
+ @Id
+ @Column(name = "ID", unique = true, nullable = false)
+ public Long getId() {
+     return this.id;
+ }
 
-  @Column(name="VALUE", length=200)
-  public String getValue() {
-    return this.value;
-  }
+ /**
+  * @param id
+  *            主键.
+  */
+ public void setId(Long id) {
+     this.id = id;
+ }
 
-  public void setValue(String value)
-  {
-    this.value = value;
-  }
+ /** @return 业务标识. */
+ @Column(name = "BUSINESS_KEY", length = 200)
+ public String getBusinessKey() {
+     return this.businessKey;
+ }
+
+ /**
+  * @param businessKey
+  *            业务标识.
+  */
+ public void setBusinessKey(String businessKey) {
+     this.businessKey = businessKey;
+ }
+
+ /** @return 编码. */
+ @Column(name = "CODE", length = 200)
+ public String getCode() {
+     return this.code;
+ }
+
+ /**
+  * @param code
+  *            编码.
+  */
+ public void setCode(String code) {
+     this.code = code;
+ }
+
+ /** @return 值. */
+ @Column(name = "VALUE", length = 200)
+ public String getValue() {
+     return this.value;
+ }
+
+ /**
+  * @param value
+  *            值.
+  */
+ public void setValue(String value) {
+     this.value = value;
+ }
 }

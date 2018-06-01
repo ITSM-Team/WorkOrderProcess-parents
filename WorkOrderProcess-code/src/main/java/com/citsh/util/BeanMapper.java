@@ -1,5 +1,4 @@
 package com.citsh.util;
-
 import java.util.List;
 
 import ma.glasnost.orika.MapperFacade;
@@ -50,3 +49,4 @@ public class BeanMapper {
         return mapper.mapAsList(src, clz);
     }
 }
+

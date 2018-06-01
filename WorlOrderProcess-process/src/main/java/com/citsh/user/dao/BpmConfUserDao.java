@@ -1,10 +1,12 @@
 package com.citsh.user.dao;
 
-import com.citsh.dao.jpa.BaseDao;
-import com.citsh.user.entity.BpmConfUser;
+
 import org.springframework.stereotype.Repository;
 
+import com.citsh.dao.jpa.BaseDao;
+import com.citsh.user.entity.BpmConfUser;
 @Repository
-public abstract interface BpmConfUserDao extends BaseDao<BpmConfUser, Long>
-{
+public interface BpmConfUserDao extends BaseDao<BpmConfUser,Long> {
+
 }
+
